@@ -31,6 +31,23 @@ Task("Build")
         });
 });
 
+Task("Test")
+    .IsDependentOn("Build")
+    .Does(() =>
+{
+    var settings = new DotNetCoreTestSettings
+    {
+        Configuration = configuration
+    };
+
+    if (IsRunningOnUnix())
+    {
+        settings.Framework = "netcoreapp1.0";
+    }
+
+    DotNetCoreTest(Paths.TestsDirectory, settings);
+});
+
 Task("Package")
     .IsDependentOn("Build")
     .Does(() =>
@@ -45,6 +62,7 @@ Task("Package")
 });
 
 Task("Default")
+    .IsDependentOn("Test")
     .IsDependentOn("Package");
 
 RunTarget(target);
