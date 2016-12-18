@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "description": "Cake.Curl is an add-in for Cake to transfer files using Curl",
+  "authors": [
+    "Enrico Campidoglio"
+  ],
+
+  "packOptions": {
+    "licenseUrl": "https://github.com/ecampidoglio/cake.curl/blob/master/License.txt",
+    "tags": [
+      "Cake",
+      "Build",
+      "Curl"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/ecampidoglio/cake.curl"
+    }
+  },
+
+  "buildOptions": {
+    "xmlDoc": true,
+    "debugType": "portable"
+  },
+
+  "dependencies": {
+    "Cake.Core": "0.17.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "buildOptions": {
+        "define": [
+          "NETCORE"
+        ]
+      },
+      "dependencies": {
+        "NETStandard.Library": {
+          "version": "1.6.0"
+        }
+      }
+    },
+    "net45": {
+    }
+  }
+}

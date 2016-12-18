@@ -1,0 +1,44 @@
+{
+  "buildOptions": {
+    "debugType": "portable"
+  },
+
+  "dependencies": {
+    "xunit": "2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Cake.Core": "0.17.0",
+    "Cake.Testing": "0.17.0",
+    "Cake.Curl": {
+      "target": "project"
+    }
+  },
+
+  "testRunner": "xunit",
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "buildOptions": {
+        "define": [
+          "NETCORE"
+        ]
+      },
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.1",
+          "type": "platform"
+        },
+        "NSubstitute": "2.0.0-rc"
+      }
+    },
+    "net451": {
+      "buildOptions": {
+        "define": [
+          "NETFX"
+        ]
+      },
+      "dependencies": {
+        "NSubstitute": "1.10.0.0"
+      }
+    }
+  }
+}
