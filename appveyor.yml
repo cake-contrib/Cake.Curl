@@ -1,0 +1,7 @@
+version: 1.0.0-beta.{build}
+environment:
+  Configuration: Release
+  PackageOutputDirectory: Packages
+test: off
+build_script:
+- ps: .\build.ps1 -Configuration $env:Configuration -PackageOutputDirectory $env:PackageOutputDirectory
