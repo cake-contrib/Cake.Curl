@@ -79,6 +79,19 @@ Task("Package")
         });
 });
 
+Task("Publish-Package")
+    .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
+    .IsDependentOn("Package")
+    .Does(() =>
+{
+    AppVeyor.UploadArtifact(
+        $"{packageOutputDirectory}/Cake.Curl.{packageVersion}.nupkg",
+        new AppVeyorUploadArtifactsSettings
+        {
+            ArtifactType = AppVeyorUploadArtifactType.NuGetPackage
+        });
+});
+
 Task("Default")
     .IsDependentOn("Test")
     .IsDependentOn("Package");
