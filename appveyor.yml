@@ -4,4 +4,4 @@ environment:
   PackageOutputDirectory: Packages
 test: off
 build_script:
-- ps: .\build.ps1 -Configuration $env:Configuration -PackageOutputDirectory $env:PackageOutputDirectory
+- ps: .\build.ps1 -Target Build -Configuration $env:Configuration -PackageOutputDirectory $env:PackageOutputDirectory
