@@ -1,4 +1,5 @@
 #load build/paths.cake
+#load build/version.cake
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
@@ -32,6 +33,21 @@ Task("Build")
         });
 });
 
+Task("Version")
+    .Does(() =>
+{
+    if (string.IsNullOrEmpty(packageVersion))
+    {
+        packageVersion = GetVersionFromProjectFile(Paths.ProjectDirectory);
+        Information($"Determined version {packageVersion} from the project file");
+    }
+    else
+    {
+        SetVersionToProjectFile(packageVersion, Paths.ProjectDirectory);
+        Information($"Assigned version {packageVersion} to the project file");
+    }
+});
+
 Task("Test")
     .IsDependentOn("Build")
     .Does(() =>
@@ -51,6 +67,7 @@ Task("Test")
 
 Task("Package")
     .IsDependentOn("Build")
+    .IsDependentOn("Version")
     .Does(() =>
 {
     DotNetCorePack(
