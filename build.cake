@@ -48,6 +48,14 @@ Task("Version")
     }
 });
 
+Task("Set-Build-Version")
+    .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
+    .IsDependentOn("Version")
+    .Does(() =>
+{
+    AppVeyor.UpdateBuildVersion(packageVersion);
+});
+
 Task("Test")
     .IsDependentOn("Build")
     .Does(() =>
