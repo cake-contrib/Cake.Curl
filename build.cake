@@ -100,8 +100,13 @@ Task("Publish-Package")
         });
 });
 
-Task("Default")
+Task("Build")
+    .IsDependentOn("Version")
+    .IsDependentOn("Set-Build-Version")
     .IsDependentOn("Test")
-    .IsDependentOn("Package");
+    .IsDependentOn("Publish-Package");
+
+Task("Default")
+    .IsDependentOn("Test");
 
 RunTarget(target);
