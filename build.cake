@@ -21,7 +21,7 @@ Task("Restore-Packages")
     DotNetCoreRestore();
 });
 
-Task("Build")
+Task("Compile")
     .IsDependentOn("Restore-Packages")
     .Does(() =>
 {
@@ -57,7 +57,7 @@ Task("Set-Build-Version")
 });
 
 Task("Test")
-    .IsDependentOn("Build")
+    .IsDependentOn("Compile")
     .Does(() =>
 {
     var settings = new DotNetCoreTestSettings
@@ -74,7 +74,7 @@ Task("Test")
 });
 
 Task("Package")
-    .IsDependentOn("Build")
+    .IsDependentOn("Compile")
     .IsDependentOn("Version")
     .Does(() =>
 {
