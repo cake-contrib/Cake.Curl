@@ -100,6 +100,19 @@ Task("Publish-Package")
         });
 });
 
+Task("Upload-Package")
+    .Does(() =>
+{
+    NuGetPush(
+        $"{packageOutputDirectory}/Cake.Curl.{packageVersion}.nupkg",
+        new NuGetPushSettings
+        {
+            Source = "https://www.nuget.org/api/v2/package",
+            ApiKey = EnvironmentVariable("NuGetApiKey")
+        }
+    );
+});
+
 Task("Build")
     .IsDependentOn("Version")
     .IsDependentOn("Set-Build-Version")
