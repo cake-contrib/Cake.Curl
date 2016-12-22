@@ -1,5 +1,6 @@
 # Cake.Curl
 
+[![NuGet](https://img.shields.io/nuget/v/Cake.Curl.svg)](https://www.nuget.org/packages/Cake.Curl)
 [![Build](https://ci.appveyor.com/api/projects/status/bswuobfgg35c1pxg?svg=true)](https://ci.appveyor.com/project/ecampidoglio/cake-curl)
 
 Cake.Curl is an add-in for [Cake](http://cakebuild.net/) that allows to transer
