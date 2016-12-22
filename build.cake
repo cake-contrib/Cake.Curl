@@ -119,6 +119,10 @@ Task("Build")
     .IsDependentOn("Test")
     .IsDependentOn("Publish-Package");
 
+Task("Deploy")
+    .IsDependentOn("Version")
+    .IsDependentOn("Upload-Package");
+
 Task("Default")
     .IsDependentOn("Test");
 
