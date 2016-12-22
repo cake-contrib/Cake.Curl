@@ -6,6 +6,7 @@
   ],
 
   "packOptions": {
+    "projectUrl": "https://github.com/ecampidoglio/Cake.Curl",
     "licenseUrl": "https://github.com/ecampidoglio/Cake.Curl/blob/master/LICENSE.txt",
     "tags": [
       "Cake",
