@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-beta1",
+  "version": "1.0.0-beta2",
   "description": "Cake.Curl is a cross-platform add-in for Cake that allows to transfer files to a remote URL using Curl.",
   "authors": [
     "Enrico Campidoglio"
