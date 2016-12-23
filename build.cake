@@ -87,7 +87,7 @@ Task("Package")
         });
 });
 
-Task("Publish-Package")
+Task("Publish-Build-Artifact")
     .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
     .IsDependentOn("Package")
     .Does(() =>
@@ -117,7 +117,7 @@ Task("Build")
     .IsDependentOn("Version")
     .IsDependentOn("Set-Build-Version")
     .IsDependentOn("Test")
-    .IsDependentOn("Publish-Package");
+    .IsDependentOn("Publish-Build-Artifact");
 
 Task("Deploy")
     .IsDependentOn("Version")
