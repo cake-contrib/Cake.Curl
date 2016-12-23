@@ -96,6 +96,7 @@ Task("Publish-Build-Artifact")
         $"{packageOutputDirectory}/Cake.Curl.{packageVersion}.nupkg",
         new AppVeyorUploadArtifactsSettings
         {
+            DeploymentName = "NuGet",
             ArtifactType = AppVeyorUploadArtifactType.NuGetPackage
         });
 });
