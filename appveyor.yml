@@ -2,6 +2,10 @@ version: 1.0.0-build.{build}
 environment:
   Configuration: Release
   PackageOutputDirectory: Packages
+  NuGetApiKey:
+    secure: F65/TLAg744V13QQ3gfXgBhK+dn2R2khRe80Y8OgBlU1b5YxrNI9UVrX4bduKmqP
 test: off
 build_script:
 - ps: .\build.ps1 -Target Build -Configuration $env:Configuration -PackageOutputDirectory $env:PackageOutputDirectory
+deploy_script:
+- ps: if ($env:AppVeyor_Repo_Tag) { .\build.ps1 -Target Deploy -PackageOutputDirectory $artifacts["NuGet"].path }
