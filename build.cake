@@ -5,6 +5,7 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var packageOutputDirectory = Argument("packageOutputDirectory", "dist");
 var packageVersion = Argument("packageVersion", string.Empty);
+var packageFilePath = Argument("packageFilePath", string.Empty);
 
 Task("Clean")
     .Does(() =>
@@ -105,7 +106,7 @@ Task("Upload-Package")
     .Does(() =>
 {
     NuGetPush(
-        $"{packageOutputDirectory}/Cake.Curl.{packageVersion}.nupkg",
+        packageFilePath,
         new NuGetPushSettings
         {
             Source = "https://www.nuget.org/api/v2/package",
