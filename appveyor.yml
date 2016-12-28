@@ -8,4 +8,4 @@ test: off
 build_script:
 - ps: .\build.ps1 -Target Build -Configuration $env:Configuration -PackageOutputDirectory $env:PackageOutputDirectory
 deploy_script:
-- ps: if ($env:AppVeyor_Repo_Tag) { .\build.ps1 -Target Deploy -PackageOutputDirectory $artifacts["NuGet"].path }
+- ps: if ($env:AppVeyor_Repo_Tag) { .\build.ps1 -Target Deploy -PackageFilePath $artifacts["NuGet"].path }
