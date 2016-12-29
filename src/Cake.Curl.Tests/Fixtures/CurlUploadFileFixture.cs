@@ -4,9 +4,9 @@ using Cake.Testing.Fixtures;
 
 namespace Cake.Curl.Tests.Fixtures
 {
-    internal sealed class CurlUploadRunnerFixture : ToolFixture<CurlSettings>
+    internal sealed class CurlUploadFileFixture : ToolFixture<CurlSettings>
     {
-        public CurlUploadRunnerFixture()
+        public CurlUploadFileFixture()
             : base("curl")
         {
             FilePath = "file/to/upload";
