@@ -66,7 +66,7 @@ namespace Cake.Curl
             Uri host,
             CurlSettings settings)
         {
-            var runner = new CurlRunner(
+            var runner = new CurlUploadRunner(
                 context.FileSystem,
                 context.Environment,
                 context.ProcessRunner,

@@ -7,20 +7,20 @@ using Cake.Core.Tooling;
 namespace Cake.Curl
 {
     /// <summary>
-    /// The curl runner.
+    /// The curl runner to upload files to a remote URL.
     /// </summary>
-    public sealed class CurlRunner : Tool<CurlSettings>
+    public sealed class CurlUploadRunner : Tool<CurlSettings>
     {
         private readonly ICakeEnvironment _environment;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurlRunner"/> class.
+        /// Initializes a new instance of the <see cref="CurlUploadRunner"/> class.
         /// </summary>
         /// <param name="fileSystem">The file system.</param>
         /// <param name="environment">The environment.</param>
         /// <param name="processRunner">The process runner.</param>
         /// <param name="tools">The tool locator.</param>
-        public CurlRunner(
+        public CurlUploadRunner(
             IFileSystem fileSystem,
             ICakeEnvironment environment,
             IProcessRunner processRunner,
@@ -56,7 +56,7 @@ namespace Cake.Curl
                 throw new ArgumentNullException(nameof(settings));
             }
 
-            Run(settings, GetUploadArguments(filePath, host, settings));
+            Run(settings, GetArguments(filePath, host, settings));
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Cake.Curl
             return "curl";
         }
 
-        private ProcessArgumentBuilder GetUploadArguments(
+        private ProcessArgumentBuilder GetArguments(
             FilePath filePath,
             Uri host,
             CurlSettings settings)

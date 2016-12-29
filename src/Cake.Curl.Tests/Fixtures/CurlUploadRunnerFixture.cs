@@ -19,7 +19,7 @@ namespace Cake.Curl.Tests.Fixtures
 
         protected override void RunTool()
         {
-            var tool = new CurlRunner(
+            var tool = new CurlUploadRunner(
                 FileSystem,
                 Environment,
                 ProcessRunner,
