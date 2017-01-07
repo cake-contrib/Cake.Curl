@@ -214,6 +214,22 @@ namespace Cake.Curl.Tests
                 // Then
                 Assert.Contains("--verbose", result.Args);
             }
+
+            [Fact]
+            public void Should_Set_The_Progress_Bar_Argument()
+            {
+                // Given
+                var fixture = new CurlUploadFileFixture
+                {
+                    Settings = { ProgressBar = true }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--progress-bar", result.Args);
+            }
         }
     }
 }

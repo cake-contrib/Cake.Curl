@@ -14,6 +14,11 @@ namespace Cake.Curl
                 arguments.Append("--verbose");
             }
 
+            if (settings.ProgressBar)
+            {
+                arguments.Append("--progress-bar");
+            }
+
             if (settings.Username != null)
             {
                 arguments.AppendSwitchQuoted(
