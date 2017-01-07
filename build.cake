@@ -58,7 +58,7 @@ Task("Set-Build-Version")
 });
 
 Task("Test")
-    .IsDependentOn("Compile")
+    .IsDependentOn("Restore-Packages")
     .Does(() =>
 {
     var settings = new DotNetCoreTestSettings
@@ -75,7 +75,7 @@ Task("Test")
 });
 
 Task("Package")
-    .IsDependentOn("Compile")
+    .IsDependentOn("Restore-Packages")
     .IsDependentOn("Version")
     .Does(() =>
 {
@@ -84,7 +84,7 @@ Task("Package")
         new DotNetCorePackSettings
         {
             OutputDirectory = packageOutputDirectory,
-            NoBuild = true
+            Configuration = configuration
         });
 });
 
@@ -119,6 +119,7 @@ Task("Build")
     .IsDependentOn("Version")
     .IsDependentOn("Set-Build-Version")
     .IsDependentOn("Test")
+    .IsDependentOn("Package")
     .IsDependentOn("Publish-Build-Artifact");
 
 Task("Deploy")
