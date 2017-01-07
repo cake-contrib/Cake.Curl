@@ -214,6 +214,22 @@ namespace Cake.Curl.Tests
                 // Then
                 Assert.DoesNotContain($"--user", result.Args);
             }
+
+            [Fact]
+            public void Should_Set_The_Verbose_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadMultipleFilesFixture
+                {
+                    Settings = { Verbose = true }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--verbose", result.Args);
+            }
         }
     }
 }

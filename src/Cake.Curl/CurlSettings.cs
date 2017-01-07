@@ -8,6 +8,11 @@ namespace Cake.Curl
     public class CurlSettings : ToolSettings
     {
         /// <summary>
+        /// Gets or sets a value indicating whether to enable verbose output.
+        /// </summary>
+        public bool Verbose { get; set; }
+
+        /// <summary>
         /// Gets or sets the username to use when authenticating to the remote host.
         /// </summary>
         public string Username { get; set; }

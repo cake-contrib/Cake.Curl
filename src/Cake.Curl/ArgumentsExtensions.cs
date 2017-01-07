@@ -9,6 +9,11 @@ namespace Cake.Curl
             this ProcessArgumentBuilder arguments,
             CurlSettings settings)
         {
+            if (settings.Verbose)
+            {
+                arguments.Append("--verbose");
+            }
+
             if (settings.Username != null)
             {
                 arguments.AppendSwitchQuoted(
