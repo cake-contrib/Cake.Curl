@@ -81,12 +81,7 @@ namespace Cake.Curl
             CurlDownloadSettings settings)
         {
             var arguments = new ProcessArgumentBuilder();
-
-            if (settings.Username != null)
-            {
-                arguments.Append("--user");
-                arguments.AppendQuoted($"{settings.Username}:{settings.Password}");
-            }
+            arguments.AppendSettings(settings);
 
             if (settings.OutputPaths != null)
             {

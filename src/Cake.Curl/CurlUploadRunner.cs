@@ -83,18 +83,13 @@ namespace Cake.Curl
             CurlSettings settings)
         {
             var arguments = new ProcessArgumentBuilder();
+            arguments.AppendSettings(settings);
 
             arguments.Append("--upload-file");
             arguments.AppendQuoted(filePath.FullPath);
 
             arguments.Append("--url");
             arguments.Append(host.AbsoluteUri);
-
-            if (settings.Username != null)
-            {
-                arguments.Append("--user");
-                arguments.AppendQuoted($"{settings.Username}:{settings.Password}");
-            }
 
             return arguments;
         }
