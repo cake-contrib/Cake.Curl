@@ -131,30 +131,32 @@ namespace Cake.Curl.Tests
             public void Should_Set_The_Path_Of_The_File_To_Upload_In_Quotes_As_Argument()
             {
                 // Given
-                var fixture = new CurlUploadFileFixture();
+                var fixture = new CurlUploadFileFixture
+                {
+                    FilePath = "file/to/upload"
+                };
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Contains(
-                    $"--upload-file \"{fixture.FilePath.FullPath}\"",
-                    result.Args);
+                Assert.Contains("--upload-file \"file/to/upload\"", result.Args);
             }
 
             [Fact]
             public void Should_Set_The_Url_Of_The_Host_As_Argument()
             {
                 // Given
-                var fixture = new CurlUploadFileFixture();
+                var fixture = new CurlUploadFileFixture
+                {
+                    Host = new Uri("protocol://host/path")
+                };
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Contains(
-                    $"--url {fixture.Host.AbsoluteUri}",
-                    result.Args);
+                Assert.Contains("--url protocol://host/path", result.Args);
             }
 
             [Fact]
@@ -163,20 +165,14 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = new CurlSettings
-                    {
-                        Username = "user",
-                        Password = "password"
-                    }
+                    Settings = { Username = "user", Password = "password" }
                 };
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Contains(
-                    $"--user \"{fixture.Settings.Username}:{fixture.Settings.Password}\"",
-                    result.Args);
+                Assert.Contains("--user \"user:password\"", result.Args);
             }
 
             [Fact]
@@ -185,11 +181,7 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = new CurlSettings
-                    {
-                        Username = null,
-                        Password = "password"
-                    }
+                    Settings = { Username = null, Password = "password" }
                 };
 
                 // When
