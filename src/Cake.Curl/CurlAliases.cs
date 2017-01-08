@@ -179,11 +179,14 @@ namespace Cake.Curl
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// CurlUploadFile("file.txt", new Uri("ftps://host/path"), new CurlSettings
-        /// {
-        ///     Username = "username",
-        ///     Password = "password"
-        /// });
+        /// CurlUploadFile(
+        ///     "file.txt",
+        ///     new Uri("ftps://host/path"),
+        ///     new CurlSettings
+        ///     {
+        ///         Username = "username",
+        ///         Password = "password"
+        ///     });
         /// </code>
         /// </example>
         [CakeMethodAlias]
