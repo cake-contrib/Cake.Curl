@@ -32,6 +32,26 @@ namespace Cake.Curl
         }
 
         /// <summary>
+        /// Downloads the file from the specified remote URL.
+        /// </summary>
+        /// <param name="host">The URL of the file to download.</param>
+        /// <param name="settings">The settings.</param>
+        public void DownloadFile(Uri host, CurlDownloadSettings settings)
+        {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
+            Run(settings, GetArguments(new[] { host }, settings));
+        }
+
+        /// <summary>
         /// Downloads the files from the specified remote URLs.
         /// </summary>
         /// <param name="hosts">The URLs of the files to download.</param>

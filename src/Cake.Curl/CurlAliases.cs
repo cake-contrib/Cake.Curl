@@ -25,6 +25,61 @@ namespace Cake.Curl
     public static class CurlAliases
     {
         /// <summary>
+        /// Downloads the file from the specified remote URL to the working directory.
+        /// </summary>
+        /// <param name="context">The Cake context.</param>
+        /// <param name="host">The URL of the file to download.</param>
+        /// <example>
+        /// <code>
+        /// CurlDownloadFile(new Uri("http://host/file"));
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        public static void CurlDownloadFile(
+            this ICakeContext context,
+            Uri host)
+        {
+            CurlDownloadFile(context, host, new CurlDownloadSettings());
+        }
+
+        /// <summary>
+        /// Downloads the file from the specified remote URL.
+        /// </summary>
+        /// <remarks>
+        /// By default, curl is going to download the file to the working directory
+        /// using the same name as on the remote host.
+        /// If you want to put the file into a different directory, you can set the
+        /// <see cref="P:CurlDownloadSettings.WorkingDirectory"/> property accordingly.
+        /// If you want to rename the downloaded file, you can do so by specifying the
+        /// output path for the file at the remote URL in the
+        /// <see cref="P:CurlDownloadSettings.OutputPaths"/> property.
+        /// </remarks>
+        /// <param name="context">The Cake context.</param>
+        /// <param name="host">The URL of the file to download.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// CurlDownloadFile(new Uri("http://host/file"), new CurlDownloadSettings
+        /// {
+        ///     OutputPaths = new FilePath[] { "output/path" }
+        /// });
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        public static void CurlDownloadFile(
+            this ICakeContext context,
+            Uri host,
+            CurlDownloadSettings settings)
+        {
+            var runner = new CurlDownloadRunner(
+                context.FileSystem,
+                context.Environment,
+                context.ProcessRunner,
+                context.Tools);
+            runner.DownloadFile(host, settings);
+        }
+
+        /// <summary>
         /// Downloads the files from the specified remote URLs to the working directory.
         /// </summary>
         /// <param name="context">The Cake context.</param>
