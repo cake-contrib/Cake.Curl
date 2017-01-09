@@ -84,7 +84,7 @@ namespace Cake.Curl
         /// <returns>The tool executable name.</returns>
         protected override IEnumerable<string> GetToolExecutableNames()
         {
-            return new[] { "curl" };
+            return new[] { "curl", "curl.exe" };
         }
 
         /// <summary>
