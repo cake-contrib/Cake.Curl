@@ -85,11 +85,8 @@ namespace Cake.Curl
             var arguments = new ProcessArgumentBuilder();
             arguments.AppendSettings(settings);
 
-            arguments.Append("--upload-file");
-            arguments.AppendQuoted(filePath.FullPath);
-
-            arguments.Append("--url");
-            arguments.Append(host.AbsoluteUri);
+            arguments.AppendSwitchQuoted("--upload-file", filePath.FullPath);
+            arguments.AppendSwitch("--url", host.AbsoluteUri);
 
             return arguments;
         }
