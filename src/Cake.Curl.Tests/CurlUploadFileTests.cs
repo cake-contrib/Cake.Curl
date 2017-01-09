@@ -128,7 +128,7 @@ namespace Cake.Curl.Tests
             }
 
             [Fact]
-            public void Should_Set_The_Path_Of_The_File_To_Upload_In_Quotes_As_Argument()
+            public void Should_Set_The_Absolute_Path_Of_The_File_To_Upload_In_Quotes_As_Argument()
             {
                 // Given
                 var fixture = new CurlUploadFileFixture
@@ -140,7 +140,7 @@ namespace Cake.Curl.Tests
                 var result = fixture.Run();
 
                 // Then
-                Assert.Contains("--upload-file \"file/to/upload\"", result.Args);
+                Assert.Contains("--upload-file \"/Working/file/to/upload\"", result.Args);
             }
 
             [Fact]
