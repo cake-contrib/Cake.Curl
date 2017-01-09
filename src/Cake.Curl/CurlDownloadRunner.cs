@@ -10,7 +10,7 @@ namespace Cake.Curl
     /// <summary>
     /// The curl runner to download files from remote URLs.
     /// </summary>
-    public sealed class CurlDownloadRunner : Tool<CurlSettings>
+    public sealed class CurlDownloadRunner : Tool<CurlDownloadSettings>
     {
         private readonly ICakeEnvironment _environment;
 
