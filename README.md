@@ -1,8 +1,8 @@
 # Cake.Curl
 
-[![NuGet](https://img.shields.io/nuget/v/Cake.Curl.svg)](https://www.nuget.org/packages/Cake.Curl)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/bswuobfgg35c1pxg?svg=true)](https://ci.appveyor.com/project/ecampidoglio/cake-curl)
-[![Travis CI](https://travis-ci.org/ecampidoglio/Cake.Curl.svg?branch=master)](https://travis-ci.org/ecampidoglio/Cake.Curl)
+| Package | Windows | Linux |
+| :---: | :------: | :-------: |
+| [![NuGet](https://img.shields.io/nuget/v/Cake.Curl.svg)](https://www.nuget.org/packages/Cake.Curl) | [![AppVeyor](https://img.shields.io/appveyor/ci/ecampidoglio/cake-curl/master.svg)](https://ci.appveyor.com/project/ecampidoglio/cake-curl) | [![Travis CI](https://img.shields.io/travis/ecampidoglio/Cake.Curl/master.svg)](https://travis-ci.org/ecampidoglio/Cake.Curl) |
 
 Cake.Curl is a cross-platform add-in for [Cake](http://cakebuild.net/) that allows to transfer files to and from remote URLs using [curl](https://curl.haxx.se).
 
