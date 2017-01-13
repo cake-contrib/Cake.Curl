@@ -12,6 +12,6 @@ trim_trailing_whitespace = true
 [*.ps1]
 end_of_line = crlf
 
-[{project.json,appveyor.yml}]
+[*.{json,yml}]
 indent_style = space
 indent_size = 2
