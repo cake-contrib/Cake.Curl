@@ -1,4 +1,5 @@
 using Cake.Core.Tooling;
+using System.Collections.Generic;
 
 namespace Cake.Curl
 {
@@ -35,5 +36,10 @@ namespace Cake.Curl
         /// Gets or sets the password to use when authenticating to the remote host.
         /// </summary>
         public string Password { get; set; }
+
+        /// <summary>
+        /// Gets or sets the header to use when communicating to the remote host.
+        /// </summary>
+        public IDictionary<string, string> Headers { get; set; }
     }
 }
