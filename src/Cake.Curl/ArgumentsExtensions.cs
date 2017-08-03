@@ -25,6 +25,16 @@ namespace Cake.Curl
                     "--user",
                     $"{settings.Username}:{settings.Password}");
             }
+
+            if (settings.Headers != null)
+            {
+                foreach (var item in settings.Headers)
+                {
+                    arguments.AppendSwitchQuoted(
+                    "--header",
+                    $"{item.Key}:{item.Value}");
+                }
+            }
         }
     }
 }

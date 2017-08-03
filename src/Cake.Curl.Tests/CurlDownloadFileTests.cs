@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Curl.Tests.Fixtures;
@@ -213,6 +214,44 @@ namespace Cake.Curl.Tests
 
                 // Then
                 Assert.Contains("--progress-bar", result.Args);
+            }
+
+            [Fact]
+            public void Should_Set_The_Headers_In_Quotes_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { Headers = new Dictionary<string, string> {
+                        { "name", "value" }
+                    } }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--header \"name:value\"", result.Args);
+            }
+
+            [Fact]
+            public void Should_Set_Multiple_Headers_In_Quotes_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { Headers = new Dictionary<string, string> {
+                        { "name1", "value1" },
+                        { "name2", "value2" },
+                        { "name3", "value3" }
+                    } }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--header \"name1:value1\" --header \"name2:value2\" --header \"name3:value3\"", result.Args);
             }
         }
     }
