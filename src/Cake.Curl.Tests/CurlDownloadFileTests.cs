@@ -222,9 +222,13 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlDownloadFileFixture
                 {
-                    Settings = { Headers = new Dictionary<string, string> {
-                        { "name", "value" }
-                    } }
+                    Settings =
+                    {
+                        Headers = new Dictionary<string, string>
+                        {
+                            ["name"] = "value"
+                        }
+                    }
                 };
 
                 // When
@@ -240,11 +244,15 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlDownloadFileFixture
                 {
-                    Settings = { Headers = new Dictionary<string, string> {
-                        { "name1", "value1" },
-                        { "name2", "value2" },
-                        { "name3", "value3" }
-                    } }
+                    Settings =
+                    {
+                        Headers = new Dictionary<string, string>
+                        {
+                            ["name1"] = "value1",
+                            ["name2"] = "value2",
+                            ["name3"] = "value3"
+                        }
+                    }
                 };
 
                 // When
