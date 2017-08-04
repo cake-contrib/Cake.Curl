@@ -22,7 +22,7 @@ namespace Cake.Curl
         /// contains information such as the amount of transferred data, transfer speed
         /// and the estimated time left. When the <see cref="P:ProgressBar"/> property
         /// is set to <see langword="true"/>, curl displays a single line of <em>#</em>
-        /// characters instead. This may be preferrable when running the build script
+        /// characters instead. This may be preferable when running the build script
         /// in a terminal where we want to keep the amount of output to a minimum.
         /// </remarks>
         public bool ProgressBar { get; set; }
