@@ -6,6 +6,7 @@
   ],
 
   "packOptions": {
+    "iconUrl": "https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png",
     "projectUrl": "https://github.com/ecampidoglio/Cake.Curl",
     "licenseUrl": "https://github.com/ecampidoglio/Cake.Curl/blob/master/LICENSE.txt",
     "tags": [
