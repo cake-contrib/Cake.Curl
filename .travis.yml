@@ -3,6 +3,6 @@ install: true # skips the dependency installation since it's done by Cake
 script:
   - ./build.sh
 mono: latest
-dotnet: 1.0.0-preview2-003131
+dotnet: 1.0.4
 dist: trusty
 sudo: required
