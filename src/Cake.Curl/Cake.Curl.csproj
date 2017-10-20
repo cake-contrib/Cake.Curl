@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Cake.Curl is a cross-platform add-in for Cake that allows to transfer files to a remote URL using curl.</Description>
+    <Authors>Enrico Campidoglio</Authors>
+    <TargetFrameworks>netcoreapp1.0;net45</TargetFrameworks>
+    <DebugType>portable</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>Cake.Curl</AssemblyName>
+    <PackageId>Cake.Curl</PackageId>
+    <PackageTags>Cake;Script;Build;curl</PackageTags>
+    <PackageIconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/ecampidoglio/Cake.Curl</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ecampidoglio/Cake.Curl/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/ecampidoglio/Cake.Curl</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cake.Core" Version="0.17.0" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
+    <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>
