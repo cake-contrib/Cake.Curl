@@ -1,8 +1,8 @@
 language: csharp
-install: true # skips the dependency installation since it's done by Cake
-script:
-  - ./build.sh
+install: true
 mono: latest
 dotnet: 1.0.4
 dist: trusty
 sudo: required
+script:
+  - ./build.sh
