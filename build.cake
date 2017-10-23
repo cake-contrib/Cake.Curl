@@ -13,7 +13,6 @@ Task("Clean")
     CleanDirectory(packageOutputDirectory);
     CleanDirectories("**/bin");
     CleanDirectories("**/obj");
-    DeleteFiles("**/project.lock.json");
 });
 
 Task("Restore-Packages")
