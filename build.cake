@@ -59,7 +59,7 @@ Task("Set-Build-Version")
     .Does(() =>
 {
     AppVeyor.UpdateBuildVersion(
-        $"{packageVersion}+{BuildSystem.AppVeyor.Environment.Build.Number}");
+        $"{packageVersion}+{AppVeyor.Environment.Build.Number}");
 });
 
 Task("Test")
