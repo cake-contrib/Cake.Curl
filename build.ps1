@@ -45,31 +45,6 @@ Param(
     [string]$Verbosity = "Verbose"
 )
 
-[Reflection.Assembly]::LoadWithPartialName("System.Security") | Out-Null
-function MD5HashFile([string] $filePath)
-{
-    if ([string]::IsNullOrEmpty($filePath) -or !(Test-Path $filePath -PathType Leaf))
-    {
-        return $null
-    }
-
-    [System.IO.Stream] $file = $null;
-    [System.Security.Cryptography.MD5] $md5 = $null;
-    try
-    {
-        $md5 = [System.Security.Cryptography.MD5]::Create()
-        $file = [System.IO.File]::OpenRead($filePath)
-        return [System.BitConverter]::ToString($md5.ComputeHash($file))
-    }
-    finally
-    {
-        if ($file -ne $null)
-        {
-            $file.Dispose()
-        }
-    }
-}
-
 Write-Host "Preparing to run build script..."
 
 if(!$PSScriptRoot){
