@@ -80,21 +80,12 @@ $TOOLS_DIR = Join-Path $PSScriptRoot "tools"
 $NUGET_EXE = Join-Path $TOOLS_DIR "nuget.exe"
 $CAKE_EXE = Join-Path $TOOLS_DIR "Cake/Cake.exe"
 $NUGET_URL = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
-$PACKAGES_CONFIG = Join-Path $TOOLS_DIR "packages.config"
-$PACKAGES_CONFIG_MD5 = Join-Path $TOOLS_DIR "packages.config.md5sum"
+$CAKE_VERSION = "0.19.5"
 
 # Make sure tools folder exists
 if ((Test-Path $PSScriptRoot) -and !(Test-Path $TOOLS_DIR)) {
     Write-Verbose -Message "Creating tools directory..."
     New-Item -Path $TOOLS_DIR -Type directory | out-null
-}
-
-# Make sure that packages.config exist.
-if (!(Test-Path $PACKAGES_CONFIG)) {
-    Write-Verbose -Message "Downloading packages.config..."
-    try { (New-Object System.Net.WebClient).DownloadFile("http://cakebuild.net/download/bootstrapper/packages", $PACKAGES_CONFIG) } catch {
-        Throw "Could not download packages.config."
-    }
 }
 
 # Try find NuGet.exe in path if not exists
@@ -125,23 +116,13 @@ $ENV:NUGET_EXE = $NUGET_EXE
 Push-Location
 Set-Location $TOOLS_DIR
 
-# Check for changes in packages.config and remove installed tools if true.
-[string] $md5Hash = MD5HashFile($PACKAGES_CONFIG)
-if((!(Test-Path $PACKAGES_CONFIG_MD5)) -Or
-  ($md5Hash -ne (Get-Content $PACKAGES_CONFIG_MD5 ))) {
-    Write-Verbose -Message "Missing or changed package.config hash..."
-    Remove-Item * -Recurse -Exclude packages.config,nuget.exe
-}
-
 Write-Verbose -Message "Restoring tools from NuGet..."
-$NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install -ExcludeVersion -OutputDirectory `"$TOOLS_DIR`""
+$NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install Cake -Version $CAKE_VERSION -ExcludeVersion -OutputDirectory `"$TOOLS_DIR`""
 
 if ($LASTEXITCODE -ne 0) {
-    Throw "An error occured while restoring NuGet tools."
+    Throw "An error occured while downloading Cake from NuGet."
 }
-else {
-    $md5Hash | Out-File $PACKAGES_CONFIG_MD5 -Encoding "ASCII"
-}
+
 Write-Verbose -Message ($NuGetOutput | out-string)
 Pop-Location
 
