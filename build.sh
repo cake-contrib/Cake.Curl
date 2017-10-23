@@ -12,8 +12,8 @@ TOOLS_DIR=$SCRIPT_DIR/tools
 NUGET_DIR=$TOOLS_DIR/NuGet
 NUGET_EXE=$NUGET_DIR/nuget.exe
 NUGET_SHIM=$TOOLS_DIR/nuget.exe.sh
-NUGET_VERSION="0.19.5"
 NUGET=$TOOLS_DIR/nuget.exe
+CAKE_VERSION="0.19.5"
 CAKE_DLL=$TOOLS_DIR/Cake.CoreCLR/Cake.dll
 
 # Define default arguments.
@@ -67,7 +67,7 @@ fi
 
 # Install Cake.CoreCRL from NuGet.
 if [ ! -f "$CAKE_DLL" ]; then
-    "$NUGET" install Cake.CoreCLR -Version $NUGET_VERSION -ExcludeVersion -OutputDirectory "$TOOLS_DIR"
+    "$NUGET" install Cake.CoreCLR -Version $CAKE_VERSION -ExcludeVersion -OutputDirectory "$TOOLS_DIR"
     if [ $? -ne 0 ]; then
         echo "Could not install the Cake.CoreCLR package from NuGet"
         exit 1
