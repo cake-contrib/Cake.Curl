@@ -1,23 +1,19 @@
-#addin nuget:?package=Newtonsoft.Json&version=9.0.1
-
 public static string GetVersionFromProjectFile(
-    DirectoryPath projectDirectory)
+    ICakeContext context,
+    FilePath projectFile)
 {
-    var projectFilePath = projectDirectory.GetFilePath("project.json").FullPath;
-    var content = System.IO.File.ReadAllText(projectFilePath);
-    var project = Newtonsoft.Json.Linq.JObject.Parse(content);
-
-    return (string)project["version"];
+    return context.XmlPeek(
+        projectFile,
+        "/Project/PropertyGroup/Version/text()");
 }
 
 public static void SetVersionToProjectFile(
-    string version,
-    DirectoryPath projectDirectory)
+    ICakeContext context,
+    FilePath projectFile,
+    string version)
 {
-    var projectFilePath = projectDirectory.GetFilePath("project.json").FullPath;
-    var content = System.IO.File.ReadAllText(projectFilePath);
-    var project = Newtonsoft.Json.Linq.JObject.Parse(content);
-
-    project["version"] = version;
-    System.IO.File.WriteAllText(projectFilePath, project.ToString());
+    context.XmlPoke(
+        projectFile,
+        "/Project/PropertyGroup/Version",
+        version);
 }

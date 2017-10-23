@@ -18,19 +18,24 @@ Task("Clean")
 Task("Restore-Packages")
     .Does(() =>
 {
-    DotNetCoreRestore();
+    DotNetCoreRestore(Paths.SolutionFile.FullPath);
 });
 
 Task("Compile")
     .IsDependentOn("Restore-Packages")
     .Does(() =>
 {
-    DotNetCoreBuild(
-        Paths.ProjectDirectory,
-        new DotNetCoreBuildSettings
-        {
-            Configuration = configuration
-        });
+    var settings = new DotNetCoreBuildSettings
+    {
+        Configuration = configuration
+    };
+
+    if (IsRunningOnUnix())
+    {
+        settings.Framework = "netcoreapp1.0";
+    }
+
+    DotNetCoreBuild(Paths.ProjectFile.FullPath, settings);
 });
 
 Task("Version")
@@ -38,12 +43,12 @@ Task("Version")
 {
     if (string.IsNullOrEmpty(packageVersion))
     {
-        packageVersion = GetVersionFromProjectFile(Paths.ProjectDirectory);
+        packageVersion = GetVersionFromProjectFile(Context, Paths.ProjectFile);
         Information($"Determined version {packageVersion} from the project file");
     }
     else
     {
-        SetVersionToProjectFile(packageVersion, Paths.ProjectDirectory);
+        SetVersionToProjectFile(Context, Paths.ProjectFile, packageVersion);
         Information($"Assigned version {packageVersion} to the project file");
     }
 });
@@ -71,7 +76,7 @@ Task("Test")
         settings.Framework = "netcoreapp1.0";
     }
 
-    DotNetCoreTest(Paths.TestsDirectory, settings);
+    DotNetCoreTest(Paths.TestProjectFile.FullPath, settings);
 });
 
 Task("Package")
@@ -80,7 +85,7 @@ Task("Package")
     .Does(() =>
 {
     DotNetCorePack(
-        Paths.ProjectDirectory,
+        Paths.ProjectFile.FullPath,
         new DotNetCorePackSettings
         {
             OutputDirectory = packageOutputDirectory,
