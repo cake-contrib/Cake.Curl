@@ -130,6 +130,27 @@ Task("Upload")
 });
 ```
 
+### Custom HTTP Headers
+
+Transferring a file using a [custom HTTP header](https://curl.haxx.se/docs/manpage.html#-H) in the request:
+
+```csharp
+Task("Upload")
+    .Does(() =>
+{
+    CurlUploadFile(
+        "some/file.txt",
+        new Uri("http://host/path"),
+        new CurlSettings
+        {
+            Headers = new Dictionary<string, string>
+            {
+                ["X-SomeHeader"] = "SomeValue"
+            }
+        });
+});
+```
+
 ## Additional Resources
 
 You can find more information about how to use Cake.Curl in the official documentation for these projects:
