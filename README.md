@@ -8,7 +8,7 @@ Cake.Curl is a cross-platform add-in for [Cake](http://cakebuild.net/) that allo
 
 ## Cross-platform
 
-Cake.Curl targets the [.NET Standard 1.6](https://docs.microsoft.com/en-us/dotnet/articles/standard/library) and the [.NET Framework 4.5](https://msdn.microsoft.com/library/ms171868(v=vs.110).aspx#core). As such, it will run on Linux, macOS and Windows.
+Cake.Curl targets the [.NET Standard 1.6](https://docs.microsoft.com/en-us/dotnet/articles/standard/library) and the [.NET Framework 4.6](https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/versions-and-dependencies). As such, it will run on Linux, macOS and Windows.
 
 ## Prerequisites
 
