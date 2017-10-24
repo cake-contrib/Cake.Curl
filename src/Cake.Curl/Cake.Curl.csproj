@@ -7,7 +7,7 @@
   <PropertyGroup>
     <Description>Cake.Curl is a cross-platform add-in for Cake that allows to transfer files to a remote URL using curl.</Description>
     <Authors>Enrico Campidoglio</Authors>
-    <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard1.6;net46</TargetFrameworks>
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Cake.Curl</AssemblyName>
@@ -24,7 +24,7 @@
     <PackageReference Include="Cake.Core" Version="0.17.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
