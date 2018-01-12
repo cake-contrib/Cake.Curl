@@ -20,6 +20,10 @@
     <RepositoryUrl>https://github.com/ecampidoglio/Cake.Curl</RepositoryUrl>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn>1701;NU1603</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Cake.Core" Version="0.22.0" />
   </ItemGroup>

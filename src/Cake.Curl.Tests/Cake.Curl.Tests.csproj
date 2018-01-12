@@ -7,6 +7,10 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn>1701;NU1603</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="../Cake.Curl/Cake.Curl.csproj" />
   </ItemGroup>
