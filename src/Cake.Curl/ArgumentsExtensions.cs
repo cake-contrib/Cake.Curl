@@ -31,8 +31,8 @@ namespace Cake.Curl
                 foreach (var item in settings.Headers)
                 {
                     arguments.AppendSwitchQuoted(
-                    "--header",
-                    $"{item.Key}:{item.Value}");
+                        "--header",
+                        $"{item.Key}:{item.Value}");
                 }
             }
         }
