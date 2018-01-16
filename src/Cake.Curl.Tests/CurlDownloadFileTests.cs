@@ -277,6 +277,38 @@ namespace Cake.Curl.Tests
                 // Then
                 Assert.Contains("--request \"COMMAND\"", result.Args);
             }
+
+            [Fact]
+            public void Should_Set_The_Location_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { FollowRedirects = true }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--location", result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_Location_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { FollowRedirects = false }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--location", result.Args);
+            }
         }
     }
 }

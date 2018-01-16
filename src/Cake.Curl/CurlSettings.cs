@@ -62,5 +62,21 @@ namespace Cake.Curl
         /// is a far better choice.
         /// </remarks>
         public string RequestCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets a flag telling curl to follow HTTP redirects.
+        /// </summary>
+        /// <remarks>
+        /// If the remote service responds with a 3xx status code and this flag
+        /// is set to <see langword="true"/>, curl will redo the request
+        /// to the URL found in the <code>Location</code> response header.
+        /// Note that if the remote service responded with a <code>301</code> (<em>Moved Permanently</em>),
+        /// <code>302</code> (<em>Found</em>) or <code>303</code> (<em>See Other</em>) status code,
+        /// curl will redo the request using the <code>GET</code> method, even if the original request
+        /// was using another method (like for example <code>PUT</code> or <code>POST</code>).
+        /// For all other 3xx status codes, curl will redo the request using the same method
+        /// as the one specified in the original request.
+        /// </remarks>
+        public bool FollowRedirects { get; set; }
     }
 }

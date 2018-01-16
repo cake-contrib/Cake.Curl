@@ -42,6 +42,11 @@ namespace Cake.Curl
                     "--request",
                     settings.RequestCommand.ToUpperInvariant());
             }
+
+            if (settings.FollowRedirects)
+            {
+                arguments.Append("--location");
+            }
         }
     }
 }
