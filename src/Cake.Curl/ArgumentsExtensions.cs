@@ -35,6 +35,13 @@ namespace Cake.Curl
                         $"{item.Key}:{item.Value}");
                 }
             }
+
+            if (settings.RequestCommand != null)
+            {
+                arguments.AppendSwitchQuoted(
+                    "--request",
+                    settings.RequestCommand.ToUpperInvariant());
+            }
         }
     }
 }

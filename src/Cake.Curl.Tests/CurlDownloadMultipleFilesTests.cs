@@ -293,6 +293,22 @@ namespace Cake.Curl.Tests
                 // Then
                 Assert.Contains("--header \"name1:value1\" --header \"name2:value2\" --header \"name3:value3\"", result.Args);
             }
+
+            [Fact]
+            public void Should_Set_The_Request_Command_In_Quotes_And_Upper_Case_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadMultipleFilesFixture
+                {
+                    Settings = { RequestCommand = "Command" }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--request \"COMMAND\"", result.Args);
+            }
         }
     }
 }
