@@ -157,3 +157,8 @@ You can find more information about how to use Cake.Curl in the official documen
 
 - [Cake](http://cakebuild.net/docs)
 - [curl](https://curl.haxx.se/docs)
+
+You can also see Cake.Curl in action in the following videos:
+
+- [Building and Deploying Applications with Cake](https://www.pluralsight.com/courses/cake-applications-deploying-building) (Pluralsight Course)
+- [Cake + .NET Core = Write Once, Build Anywhere (@41:30)](https://youtu.be/FKbykwvB_MU?t=41m30s) (NDC London 2018 Conference Talk)
