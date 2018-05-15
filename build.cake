@@ -32,7 +32,7 @@ Task("Compile")
 
     if (IsRunningOnUnix())
     {
-        settings.Framework = "netcoreapp1.0";
+        settings.Framework = "netcoreapp2.0";
     }
 
     DotNetCoreBuild(Paths.ProjectFile.FullPath, settings);
@@ -73,7 +73,7 @@ Task("Test")
 
     if (IsRunningOnUnix())
     {
-        settings.Framework = "netcoreapp1.0";
+        settings.Framework = "netcoreapp2.0";
     }
 
     DotNetCoreTest(Paths.TestProjectFile.FullPath, settings);

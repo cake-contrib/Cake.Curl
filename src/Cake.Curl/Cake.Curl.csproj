@@ -7,7 +7,7 @@
   <PropertyGroup>
     <Description>Cake.Curl is a cross-platform add-in for Cake that allows to transfer files to a remote URL using curl.</Description>
     <Authors>Enrico Campidoglio</Authors>
-    <TargetFrameworks>netstandard1.6;net46</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Cake.Curl</AssemblyName>
