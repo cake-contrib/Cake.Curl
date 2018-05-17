@@ -13,7 +13,7 @@ NUGET_DIR=$TOOLS_DIR/NuGet
 NUGET_EXE=$NUGET_DIR/nuget.exe
 NUGET_SHIM=$TOOLS_DIR/nuget.exe.sh
 NUGET=$TOOLS_DIR/nuget.exe
-CAKE_VERSION="0.23.0"
+CAKE_VERSION="0.26.0"
 CAKE_DLL=$TOOLS_DIR/Cake.CoreCLR/Cake.dll
 
 # Define default arguments.
