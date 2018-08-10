@@ -32,7 +32,7 @@ Task("Compile")
 
     if (IsRunningOnUnix())
     {
-        settings.Framework = "netcoreapp2.0";
+        settings.Framework = "netstandard2.0";
     }
 
     DotNetCoreBuild(Paths.ProjectFile.FullPath, settings);
