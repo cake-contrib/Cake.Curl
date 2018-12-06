@@ -1,5 +1,5 @@
-using Cake.Core.Tooling;
 using System.Collections.Generic;
+using Cake.Core.Tooling;
 
 namespace Cake.Curl
 {
@@ -64,7 +64,7 @@ namespace Cake.Curl
         public string RequestCommand { get; set; }
 
         /// <summary>
-        /// Gets or sets a flag telling curl to follow HTTP redirects.
+        /// Gets or sets a value indicating whether to follow HTTP redirects.
         /// </summary>
         /// <remarks>
         /// If the remote service responds with a 3xx status code and this flag
