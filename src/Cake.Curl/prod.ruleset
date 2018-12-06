@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Production" ToolsVersion="15.0">
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="SA1008" Action="None" />
+    <Rule Id="SA1009" Action="None" />
+    <Rule Id="SA1101" Action="None" />
+    <Rule Id="SA1118" Action="None" />
+    <Rule Id="SA1309" Action="None" />
+    <Rule Id="SA1633" Action="None" />
+    <Rule Id="SA1652" Action="None" />
+    <!-- Disabled to allow spaces before parethesis when assigning tuple literals -->
+    <Rule Id="SA1008" Action="None" />
+    <!-- Disabled to allow not having spaces within switch statements
+         https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/2509 -->
+    <Rule Id="SA1513" Action="None" />
+  </Rules>
+</RuleSet>

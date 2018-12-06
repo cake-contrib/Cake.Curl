@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Production" ToolsVersion="15.0">
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="SA1101" Action="None" />
+    <Rule Id="SA1118" Action="None" />
+    <Rule Id="SA1133" Action="None" />
+    <Rule Id="SA1306" Action="None" />
+    <Rule Id="SA1309" Action="None" />
+    <Rule Id="SA1310" Action="None" />
+    <Rule Id="SA1400" Action="None" />
+    <Rule Id="SA1401" Action="None" />
+    <Rule Id="SA1633" Action="None" />
+    <Rule Id="SA1652" Action="None" />
+    <Rule Id="xUnit1006" Action="None" />
+    <!-- Disabled to allow spaces before parethesis when assigning tuple literals -->
+    <Rule Id="SA1008" Action="None" />
+  </Rules>
+</RuleSet>

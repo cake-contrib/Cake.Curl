@@ -8,8 +8,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <CodeAnalysisRuleSet>./test.ruleset</CodeAnalysisRuleSet>
     <NoWarn>1701;NU1603</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="../stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../Cake.Curl/Cake.Curl.csproj" />
@@ -22,6 +27,7 @@
     <PackageReference Include="NSubstitute" Version="2.0.3" />
     <PackageReference Include="Cake.Core" Version="0.30.0" />
     <PackageReference Include="Cake.Testing" Version="0.30.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net46' ">
