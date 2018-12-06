@@ -11,6 +11,9 @@
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Cake.Curl</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <PackageId>Cake.Curl</PackageId>
     <PackageTags>Cake;Script;Build;curl</PackageTags>
     <PackageIconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
