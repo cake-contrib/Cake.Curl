@@ -47,6 +47,11 @@ namespace Cake.Curl
             {
                 arguments.Append("--location");
             }
+
+            if (settings.Fail)
+            {
+                arguments.Append("--fail");
+            }
         }
     }
 }

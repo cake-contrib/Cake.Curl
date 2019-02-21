@@ -78,5 +78,18 @@ namespace Cake.Curl
         /// as the one specified in the original request.
         /// </remarks>
         public bool FollowRedirects { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether HTTP errors above 400 should result in return code 22.
+        /// </summary>
+        /// <remarks>
+        /// (HTTP) Fail silently (no output at all) on server errors. This is mostly done to better enable scripts etc
+        /// to better deal with failed attempts.
+        /// In normal cases when an HTTP server fails to deliver a document, it returns an HTML document stating so
+        /// (which often also describes why and more). This flag will prevent curl from outputting that and return error 22.
+        /// This method is not fail-safe and there are occasions where non-successful response codes will slip through,
+        /// especially when authentication is involved(response codes 401 and 407).
+        /// </remarks>
+        public bool Fail { get; set; }
     }
 }

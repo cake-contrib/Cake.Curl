@@ -317,6 +317,38 @@ namespace Cake.Curl.Tests
                 // Then
                 Assert.DoesNotContain("--location", result.Args);
             }
+
+            [Fact]
+            public void Should_Set_The_Fail_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlUploadFileFixture
+                {
+                    Settings = { Fail = true }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--fail", result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_Fail_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { Fail = false }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--fail", result.Args);
+            }
         }
     }
 }
