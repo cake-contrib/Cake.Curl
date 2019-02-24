@@ -80,15 +80,18 @@ namespace Cake.Curl
         public bool FollowRedirects { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether HTTP errors above 400 should result in return code 22.
+        /// Gets or sets a value indicating whether HTTP errors should result in a non-zero exit code.
         /// </summary>
         /// <remarks>
-        /// (HTTP) Fail silently (no output at all) on server errors. This is mostly done to better enable scripts etc
-        /// to better deal with failed attempts.
-        /// In normal cases when an HTTP server fails to deliver a document, it returns an HTML document stating so
-        /// (which often also describes why and more). This flag will prevent curl from outputting that and return error 22.
-        /// This method is not fail-safe and there are occasions where non-successful response codes will slip through,
-        /// especially when authentication is involved(response codes 401 and 407).
+        /// When HTTP servers fail to fulfill a request, they will often return an HTML page with the error information to the client.
+        /// In situations like these, curl's default behavior is to send the content of the error page to <code>stdout</code> and exit with a zero exit code, indicating success.
+        /// While this may be fine at the command line, it's quite problematic in scripts where it can lead to false positives.
+        /// Setting this property to <see langword="true"/>, tells curl to treat HTTP errors (4xx and 5xx) as failed operations
+        /// and to exit with status code <code>22</code> instead of <code>0</code>.
+        /// Cake will then pick up the non-successful status code and turn it into a runtime exception.
+        /// Note that, according to <a href="https://curl.haxx.se/docs/manpage.html#-f">curl's documentation</a>, this method is not completely fail-safe
+        /// and there are occasions where non-successful response codes (especially those related to authentication, like <code>401</code>
+        /// and <code>407</code>) will slip through.
         /// </remarks>
         public bool Fail { get; set; }
     }
