@@ -330,7 +330,7 @@ namespace Cake.Curl.Tests
             public void Should_Not_Set_The_Location_Option_As_Argument()
             {
                 // Given
-                var fixture = new CurlDownloadFileFixture
+                var fixture = new CurlDownloadMultipleFilesFixture
                 {
                     Settings = { FollowRedirects = false }
                 };
@@ -362,7 +362,7 @@ namespace Cake.Curl.Tests
             public void Should_Not_Set_The_Fail_Option_As_Argument()
             {
                 // Given
-                var fixture = new CurlDownloadFileFixture
+                var fixture = new CurlDownloadMultipleFilesFixture
                 {
                     Settings = { Fail = false }
                 };
