@@ -57,6 +57,26 @@ namespace Cake.Curl
             {
                 arguments.Append("--fail");
             }
+
+            if (settings.RetryCount > 0)
+            {
+                arguments.AppendSwitch("--retry", settings.RetryCount.ToString());
+            }
+
+            if (settings.RetryDelaySeconds > 0)
+            {
+                arguments.AppendSwitch("--retry-delay", settings.RetryDelaySeconds.ToString());
+            }
+
+            if (settings.RetryMaxTimeSeconds > 0)
+            {
+                arguments.AppendSwitch("--retry-max-time", settings.RetryMaxTimeSeconds.ToString());
+            }
+
+            if (settings.RetryOnConnectionRefused)
+            {
+                arguments.Append("--retry-connrefused");
+            }
         }
     }
 }
