@@ -341,6 +341,134 @@ namespace Cake.Curl.Tests
                 // Then
                 Assert.DoesNotContain("--fail", result.Args);
             }
+
+            [Fact]
+            public void Should_Set_The_Retry_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { Retry = 1000 }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--retry 1000", result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_Retry_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { Retry = 0 }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--retry", result.Args);
+            }
+
+            [Fact]
+            public void Should_Set_The_RetryDelay_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { RetryDelay = 1000 }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--retry-delay 1000", result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_RetryDelay_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { RetryDelay = 0 }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--retry-delay", result.Args);
+            }
+
+            [Fact]
+            public void Should_Set_The_RetryMaxTime_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { RetryMaxTime = 1000 }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--retry-max-time 1000", result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_RetryMaxTme_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { RetryMaxTime = 0 }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--retry-max-time", result.Args);
+            }
+
+            [Fact]
+            public void Should_Set_The_RetryConnRefused_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { RetryConnRefused = true }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--retry-connrefused", result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_RetryConnRefused_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { RetryConnRefused = false }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--retry-connrefused", result.Args);
+            }
         }
     }
 }
