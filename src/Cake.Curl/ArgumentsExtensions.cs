@@ -1,5 +1,6 @@
 using Cake.Core;
 using Cake.Core.IO;
+using Cake.Curl.Arguments;
 
 namespace Cake.Curl
 {
@@ -32,7 +33,7 @@ namespace Cake.Curl
                 {
                     arguments.AppendSwitchQuoted(
                         "--header",
-                        $"{item.Key}:{item.Value}");
+                        new NameValueArgument(item.Key, ":", item.Value));
                 }
             }
 
