@@ -106,7 +106,7 @@ namespace Cake.Curl
         /// By using <a href="https://curl.haxx.se/docs/manpage.html#--retry-delay">--retry-delay</a> you disable this exponential backoff algorithm.
         /// See also <a href="https://curl.haxx.se/docs/manpage.html#--retry-max-time">--retry-max-time</a> to limit the total time allowed for retries.
         /// </remarks>
-        public uint Retry { get; set; }
+        public uint RetryCount { get; set; }
 
         /// <summary>
         /// Gets or sets the amount of time in seconds before each retry when a transfer has failed with a transient error
@@ -116,7 +116,7 @@ namespace Cake.Curl
         /// This option is only interesting if <a href="https://curl.haxx.se/docs/manpage.html#--retry">--retry</a> is also used.
         /// Setting this delay to zero will make curl use the default backoff time.
         /// </remarks>
-        public uint RetryDelay { get; set; }
+        public uint RetryDelaySeconds { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum time in seconds for retries to be done.
@@ -128,7 +128,7 @@ namespace Cake.Curl
         /// To limit a single request´s maximum time, use <a href="https://curl.haxx.se/docs/manpage.html#-m">--max-time</a>.
         /// Set this option to zero to not timeout retries.
         /// </remarks>
-        public uint RetryMaxTime { get; set; }
+        public uint RetryMaxTimeSeconds { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether curl should consider <code>ECONNREFUSED</code> (in addition to the other conditions) as a transient error
@@ -137,6 +137,6 @@ namespace Cake.Curl
         /// <remarks>
         /// This option is used together with <a href="https://curl.haxx.se/docs/manpage.html#--retry">--retry</a>.
         /// </remarks>
-        public bool RetryConnRefused { get; set; }
+        public bool RetryOnConnectionRefused { get; set; }
     }
 }

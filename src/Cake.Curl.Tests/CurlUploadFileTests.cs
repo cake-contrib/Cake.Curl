@@ -356,14 +356,14 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = { Retry = 1000 }
+                    Settings = { RetryCount = 3 }
                 };
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Contains("--retry 1000", result.Args);
+                Assert.Contains("--retry 3", result.Args);
             }
 
             [Fact]
@@ -372,7 +372,7 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = { Retry = 0 }
+                    Settings = { RetryCount = 0 }
                 };
 
                 // When
@@ -388,14 +388,14 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = { RetryDelay = 1000 }
+                    Settings = { RetryDelaySeconds = 30 }
                 };
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Contains("--retry-delay 1000", result.Args);
+                Assert.Contains("--retry-delay 30", result.Args);
             }
 
             [Fact]
@@ -404,7 +404,7 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = { RetryDelay = 0 }
+                    Settings = { RetryDelaySeconds = 0 }
                 };
 
                 // When
@@ -420,14 +420,14 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = { RetryMaxTime = 1000 }
+                    Settings = { RetryMaxTimeSeconds = 300 }
                 };
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Contains("--retry-max-time 1000", result.Args);
+                Assert.Contains("--retry-max-time 300", result.Args);
             }
 
             [Fact]
@@ -436,7 +436,7 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = { RetryMaxTime = 0 }
+                    Settings = { RetryMaxTimeSeconds = 0 }
                 };
 
                 // When
@@ -452,7 +452,7 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = { RetryConnRefused = true }
+                    Settings = { RetryOnConnectionRefused = true }
                 };
 
                 // When
@@ -468,7 +468,7 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlUploadFileFixture
                 {
-                    Settings = { RetryConnRefused = false }
+                    Settings = { RetryOnConnectionRefused = false }
                 };
 
                 // When

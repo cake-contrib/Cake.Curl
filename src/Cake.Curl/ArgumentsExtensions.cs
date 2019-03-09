@@ -1,6 +1,5 @@
 using Cake.Core;
 using Cake.Core.IO;
-using static System.FormattableString;
 
 namespace Cake.Curl
 {
@@ -54,22 +53,22 @@ namespace Cake.Curl
                 arguments.Append("--fail");
             }
 
-            if (settings.Retry > 0)
+            if (settings.RetryCount > 0)
             {
-                arguments.AppendSwitch("--retry", Invariant($"{settings.Retry}"));
+                arguments.AppendSwitch("--retry", settings.RetryCount.ToString());
             }
 
-            if (settings.RetryDelay > 0)
+            if (settings.RetryDelaySeconds > 0)
             {
-                arguments.AppendSwitch("--retry-delay", Invariant($"{settings.RetryDelay}"));
+                arguments.AppendSwitch("--retry-delay", settings.RetryDelaySeconds.ToString());
             }
 
-            if (settings.RetryMaxTime > 0)
+            if (settings.RetryMaxTimeSeconds > 0)
             {
-                arguments.AppendSwitch("--retry-max-time", Invariant($"{settings.RetryMaxTime}"));
+                arguments.AppendSwitch("--retry-max-time", settings.RetryMaxTimeSeconds.ToString());
             }
 
-            if (settings.RetryConnRefused)
+            if (settings.RetryOnConnectionRefused)
             {
                 arguments.Append("--retry-connrefused");
             }
