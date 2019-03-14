@@ -138,5 +138,25 @@ namespace Cake.Curl
         /// This option is used together with <a href="https://curl.haxx.se/docs/manpage.html#--retry">--retry</a>.
         /// </remarks>
         public bool RetryOnConnectionRefused { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum time in seconds that you allow the whole operation to take.
+        /// </summary>
+        /// <remarks>
+        /// This is useful for preventing your batch jobs from hanging for hours due to slow networks or links going down.
+        /// Since curl version 7.32.0, this option accepts decimal values, but the actual timeout will decrease in accuracy as the specified timeout increases in decimal precision.
+        /// See also <a href="https://curl.haxx.se/docs/manpage.html#--connect-timeout">--connect-timeout</a>.
+        /// </remarks>
+        public double MaxTimeSeconds { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum time in seconds that you allow curl's connection to take.
+        /// </summary>
+        /// <remarks>
+        /// This only limits the connection phase, so if curl connects within the given period it will continue - if not it will exit.
+        /// Since curl version 7.32.0, this option accepts decimal values.
+        /// See also <a href="https://curl.haxx.se/docs/manpage.html#-m">-m, --max-time</a>.
+        /// </remarks>
+        public double ConnectionTimeoutSeconds { get; set; }
     }
 }

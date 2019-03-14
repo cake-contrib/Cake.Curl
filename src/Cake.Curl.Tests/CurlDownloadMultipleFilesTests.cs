@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Curl.Tests.Fixtures;
@@ -500,6 +501,78 @@ namespace Cake.Curl.Tests
 
                 // Then
                 Assert.DoesNotContain("--retry-connrefused", result.Args);
+            }
+
+            [Theory]
+            [InlineData(60)]
+            [InlineData(120.8)]
+            [InlineData(1000.12)]
+            public void Should_Set_The_MaxTime_Option_As_Argument(double maxTimeSeconds)
+            {
+                // Given
+                var fixture = new CurlDownloadMultipleFilesFixture
+                {
+                    Settings = { MaxTimeSeconds = maxTimeSeconds }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains(
+                    $"--max-time {maxTimeSeconds.ToString(CultureInfo.CurrentCulture)}",
+                    result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_MaxTime_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadMultipleFilesFixture
+                {
+                    Settings = { MaxTimeSeconds = default(double) }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--max-time", result.Args);
+            }
+
+            [Theory]
+            [InlineData(30)]
+            [InlineData(60.4)]
+            [InlineData(1100.98)]
+            public void Should_Set_The_ConnectTimeout_Option_As_Argument(double connectionTimeoutSeconds)
+            {
+                // Given
+                var fixture = new CurlDownloadMultipleFilesFixture
+                {
+                    Settings = { ConnectionTimeoutSeconds = connectionTimeoutSeconds }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains($"--connect-timeout {connectionTimeoutSeconds.ToString(CultureInfo.CurrentCulture)}", result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_ConnectTimeout_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadMultipleFilesFixture
+                {
+                    Settings = { ConnectionTimeoutSeconds = default(double) }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--connect-timeout", result.Args);
             }
         }
     }
