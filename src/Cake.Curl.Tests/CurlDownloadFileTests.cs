@@ -472,15 +472,13 @@ namespace Cake.Curl.Tests
             }
 
             [Theory]
-            [InlineData(60)]
-            [InlineData(120.8)]
-            [InlineData(1000.12)]
-            public void Should_Set_The_MaxTime_Option_As_Argument(double maxTimeSeconds)
+            [MemberData(nameof(CurlTimeSpanTestData.TimeSpanData), MemberType = typeof(CurlTimeSpanTestData))]
+            public void Should_Set_The_MaxTime_Option_As_Argument(TimeSpan maxTime)
             {
                 // Given
                 var fixture = new CurlDownloadFileFixture
                 {
-                    Settings = { MaxTimeSeconds = maxTimeSeconds }
+                    Settings = { MaxTime = maxTime }
                 };
 
                 // When
@@ -488,7 +486,7 @@ namespace Cake.Curl.Tests
 
                 // Then
                 Assert.Contains(
-                    $"--max-time {maxTimeSeconds.ToString(CultureInfo.CurrentCulture)}",
+                    $"--max-time {maxTime.TotalSeconds.ToString(CultureInfo.CurrentCulture)}",
                     result.Args);
             }
 
@@ -498,7 +496,7 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlDownloadFileFixture
                 {
-                    Settings = { MaxTimeSeconds = default(double) }
+                    Settings = { MaxTime = null }
                 };
 
                 // When
@@ -509,15 +507,13 @@ namespace Cake.Curl.Tests
             }
 
             [Theory]
-            [InlineData(30)]
-            [InlineData(60.4)]
-            [InlineData(1100.98)]
-            public void Should_Set_The_ConnectTimeout_Option_As_Argument(double connectionTimeoutSeconds)
+            [MemberData(nameof(CurlTimeSpanTestData.TimeSpanData), MemberType = typeof(CurlTimeSpanTestData))]
+            public void Should_Set_The_ConnectTimeout_Option_As_Argument(TimeSpan connectionTimeout)
             {
                 // Given
                 var fixture = new CurlDownloadFileFixture
                 {
-                    Settings = { ConnectionTimeoutSeconds = connectionTimeoutSeconds }
+                    Settings = { ConnectionTimeout = connectionTimeout }
                 };
 
                 // When
@@ -525,7 +521,7 @@ namespace Cake.Curl.Tests
 
                 // Then
                 Assert.Contains(
-                    $"--connect-timeout {connectionTimeoutSeconds.ToString(CultureInfo.CurrentCulture)}",
+                    $"--connect-timeout {connectionTimeout.TotalSeconds.ToString(CultureInfo.CurrentCulture)}",
                     result.Args);
             }
 
@@ -535,7 +531,7 @@ namespace Cake.Curl.Tests
                 // Given
                 var fixture = new CurlDownloadFileFixture
                 {
-                    Settings = { ConnectionTimeoutSeconds = default(double) }
+                    Settings = { ConnectionTimeout = null }
                 };
 
                 // When

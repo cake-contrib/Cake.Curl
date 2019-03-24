@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cake.Core.Tooling;
 
@@ -147,7 +148,7 @@ namespace Cake.Curl
         /// Since curl version 7.32.0, this option accepts decimal values, but the actual timeout will decrease in accuracy as the specified timeout increases in decimal precision.
         /// See also <a href="https://curl.haxx.se/docs/manpage.html#--connect-timeout">--connect-timeout</a>.
         /// </remarks>
-        public double MaxTimeSeconds { get; set; }
+        public TimeSpan? MaxTime { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum time in seconds that you allow curl's connection to take.
@@ -157,6 +158,6 @@ namespace Cake.Curl
         /// Since curl version 7.32.0, this option accepts decimal values.
         /// See also <a href="https://curl.haxx.se/docs/manpage.html#-m">-m, --max-time</a>.
         /// </remarks>
-        public double ConnectionTimeoutSeconds { get; set; }
+        public TimeSpan? ConnectionTimeout { get; set; }
     }
 }

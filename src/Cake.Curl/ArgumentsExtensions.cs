@@ -79,18 +79,18 @@ namespace Cake.Curl
                 arguments.Append("--retry-connrefused");
             }
 
-            if (settings.MaxTimeSeconds > 0.0)
+            if (settings.MaxTime.HasValue)
             {
                 arguments.AppendSwitch(
                     "--max-time",
-                    settings.MaxTimeSeconds.ToString(CultureInfo.CurrentCulture));
+                    settings.MaxTime.Value.TotalSeconds.ToString(CultureInfo.CurrentCulture));
             }
 
-            if (settings.ConnectionTimeoutSeconds > 0.0)
+            if (settings.ConnectionTimeout.HasValue)
             {
                 arguments.AppendSwitch(
                     "--connect-timeout",
-                    settings.ConnectionTimeoutSeconds.ToString(CultureInfo.CurrentCulture));
+                    settings.ConnectionTimeout.Value.TotalSeconds.ToString(CultureInfo.CurrentCulture));
             }
         }
     }
