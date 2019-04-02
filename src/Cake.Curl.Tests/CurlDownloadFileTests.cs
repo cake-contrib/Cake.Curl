@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Curl.Tests.Fixtures;
@@ -471,11 +470,11 @@ namespace Cake.Curl.Tests
                 Assert.DoesNotContain("--retry-connrefused", result.Args);
             }
 
-            [Theory]
-            [MemberData(nameof(CurlTimeSpanTestData.TimeSpanData), MemberType = typeof(CurlTimeSpanTestData))]
-            public void Should_Set_The_MaxTime_Option_As_Argument(TimeSpan maxTime)
+            [Fact]
+            public void Should_Set_The_MaxTime_Option_As_Argument()
             {
                 // Given
+                var maxTime = TimeSpan.FromSeconds(2.37);
                 var fixture = new CurlDownloadFileFixture
                 {
                     Settings = { MaxTime = maxTime }
@@ -486,7 +485,7 @@ namespace Cake.Curl.Tests
 
                 // Then
                 Assert.Contains(
-                    $"--max-time {maxTime.TotalSeconds.ToString(CultureInfo.CurrentCulture)}",
+                    $"--max-time {maxTime.TotalSeconds}",
                     result.Args);
             }
 
@@ -506,11 +505,11 @@ namespace Cake.Curl.Tests
                 Assert.DoesNotContain("--max-time", result.Args);
             }
 
-            [Theory]
-            [MemberData(nameof(CurlTimeSpanTestData.TimeSpanData), MemberType = typeof(CurlTimeSpanTestData))]
-            public void Should_Set_The_ConnectTimeout_Option_As_Argument(TimeSpan connectionTimeout)
+            [Fact]
+            public void Should_Set_The_ConnectTimeout_Option_As_Argument()
             {
                 // Given
+                var connectionTimeout = TimeSpan.FromSeconds(5.5);
                 var fixture = new CurlDownloadFileFixture
                 {
                     Settings = { ConnectionTimeout = connectionTimeout }
@@ -521,7 +520,7 @@ namespace Cake.Curl.Tests
 
                 // Then
                 Assert.Contains(
-                    $"--connect-timeout {connectionTimeout.TotalSeconds.ToString(CultureInfo.CurrentCulture)}",
+                    $"--connect-timeout {connectionTimeout.TotalSeconds}",
                     result.Args);
             }
 
