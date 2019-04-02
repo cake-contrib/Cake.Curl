@@ -1,3 +1,4 @@
+using System.Globalization;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.IO.Arguments;
@@ -76,6 +77,20 @@ namespace Cake.Curl
             if (settings.RetryOnConnectionRefused)
             {
                 arguments.Append("--retry-connrefused");
+            }
+
+            if (settings.MaxTime.HasValue)
+            {
+                arguments.AppendSwitch(
+                    "--max-time",
+                    settings.MaxTime.Value.TotalSeconds.ToString(CultureInfo.CurrentCulture));
+            }
+
+            if (settings.ConnectionTimeout.HasValue)
+            {
+                arguments.AppendSwitch(
+                    "--connect-timeout",
+                    settings.ConnectionTimeout.Value.TotalSeconds.ToString(CultureInfo.CurrentCulture));
             }
         }
     }

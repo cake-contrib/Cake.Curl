@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Cake.Core;
 using Cake.Curl.Tests.Fixtures;
 using Cake.Testing;
@@ -476,6 +477,76 @@ namespace Cake.Curl.Tests
 
                 // Then
                 Assert.DoesNotContain("--retry-connrefused", result.Args);
+            }
+
+            [Fact]
+            public void Should_Set_The_MaxTime_Option_As_Argument()
+            {
+                // Given
+                var maxTime = TimeSpan.FromSeconds(2.37);
+                var fixture = new CurlUploadFileFixture
+                {
+                    Settings = { MaxTime = maxTime }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains(
+                    $"--max-time {maxTime.TotalSeconds}",
+                    result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_MaxTime_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlUploadFileFixture
+                {
+                    Settings = { MaxTime = null }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--max-time", result.Args);
+            }
+
+            [Fact]
+            public void Should_Set_The_ConnectTimeout_Option_As_Argument()
+            {
+                // Given
+                var connectionTimeout = TimeSpan.FromSeconds(5.5);
+                var fixture = new CurlUploadFileFixture
+                {
+                    Settings = { ConnectionTimeout = connectionTimeout }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains(
+                    $"--connect-timeout {connectionTimeout.TotalSeconds}",
+                    result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_ConnectTimeout_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlUploadFileFixture
+                {
+                    Settings = { ConnectionTimeout = null }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--connect-timeout", result.Args);
             }
         }
     }
