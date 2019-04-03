@@ -105,28 +105,16 @@ namespace Cake.Curl
 
             if (settings.OutputPaths != null)
             {
-                foreach (var arg in JoinHostsAndOutputPaths(hosts, settings.OutputPaths))
-                {
-                    arguments.Append(arg);
-                }
+                arguments.AppendDownloadToSpecificPaths(
+                    hosts,
+                    settings.OutputPaths.GetAbsolutePaths(_environment));
             }
             else
             {
-                foreach (var host in hosts)
-                {
-                    arguments.AppendSwitch("-O", host.AbsoluteUri);
-                }
+                arguments.AppendDownloadToCurrentDirectory(hosts);
             }
 
             return arguments;
-        }
-
-        private IEnumerable<string> JoinHostsAndOutputPaths(
-            IEnumerable<Uri> hosts,
-            IEnumerable<FilePath> paths)
-        {
-            return hosts.Zip(paths, (host, path) =>
-                $"-o \"{path.GetAbsolutePath(_environment)}\" {host.AbsoluteUri}");
         }
     }
 }
