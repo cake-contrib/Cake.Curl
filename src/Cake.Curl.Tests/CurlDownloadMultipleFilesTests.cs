@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Curl.Tests.Fixtures;
