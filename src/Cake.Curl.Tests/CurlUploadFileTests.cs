@@ -189,7 +189,7 @@ namespace Cake.Curl.Tests
                 var result = fixture.Run();
 
                 // Then
-                Assert.DoesNotContain($"--user", result.Args);
+                Assert.DoesNotContain("--user", result.Args);
             }
 
             [Fact]
@@ -431,7 +431,7 @@ namespace Cake.Curl.Tests
             }
 
             [Fact]
-            public void Should_Not_Set_The_RetryMaxTme_Option_As_Argument()
+            public void Should_Not_Set_The_RetryMaxTime_Option_As_Argument()
             {
                 // Given
                 var fixture = new CurlUploadFileFixture
