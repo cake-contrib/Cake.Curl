@@ -126,7 +126,7 @@ namespace Cake.Curl
             IEnumerable<FilePath> paths)
         {
             return hosts.Zip(paths, (host, path) =>
-                $"-o \"{path.MakeAbsolute(_environment).FullPath}\" {host.AbsoluteUri}");
+                $"-o \"{path.GetAbsolutePath(_environment)}\" {host.AbsoluteUri}");
         }
     }
 }

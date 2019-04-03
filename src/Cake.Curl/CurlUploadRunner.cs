@@ -87,7 +87,7 @@ namespace Cake.Curl
 
             arguments.AppendSwitchQuoted(
                 "--upload-file",
-                filePath.MakeAbsolute(_environment).FullPath);
+                filePath.GetAbsolutePath(_environment));
 
             arguments.AppendSwitch("--url", host.AbsoluteUri);
 
