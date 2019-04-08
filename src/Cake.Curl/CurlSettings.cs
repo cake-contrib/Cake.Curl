@@ -97,47 +97,57 @@ namespace Cake.Curl
         public bool Fail { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of retries if a transient error is returned when curl performs a transfer, it will retry this number of times before giving up.
+        /// Gets or sets the number of times curl should retry a failed operation before giving up.
+        /// Setting this property to <em>zero</em> means no retries. This is the default value.
+        /// <seealso cref="RetryDelaySeconds"/>
+        /// <seealso cref="RetryMaxTimeSeconds"/>
+        /// <seealso cref="RetryOnConnectionRefused"/>
         /// </summary>
         /// <remarks>
-        /// Setting the number to zero makes curl do no retries (which is the default).
-        /// Transient error means either: a timeout, an FTP 4xx response code or an HTTP 408 or 5xx response code.
-        /// When curl is about to retry a transfer, it will first wait one second and then for all forthcoming retries
-        /// it will double the waiting time until it reaches 10 minutes which then will be the delay between the rest of the retries.
-        /// By using <a href="https://curl.haxx.se/docs/manpage.html#--retry-delay">--retry-delay</a> you disable this exponential backoff algorithm.
-        /// See also <a href="https://curl.haxx.se/docs/manpage.html#--retry-max-time">--retry-max-time</a> to limit the total time allowed for retries.
+        /// According to <a href="https://curl.haxx.se/docs/manpage.html#--retry">curl's documentation</a>,
+        /// the kinds of errors that qualify for a retry are:
+        /// <list type="bullet">
+        /// <item>
+        /// <description>Timeouts</description>
+        /// </item>
+        /// <item>
+        /// <description>FTP 4xx responses</description>
+        /// </item>
+        /// <item>
+        /// <description>HTTP <code>408</code> or 5xx responses</description>
+        /// </item>
+        /// </list>
+        /// This option can be further tweaked with <see cref="RetryDelaySeconds"/> and <see cref="RetryMaxTimeSeconds"/>.
         /// </remarks>
         public uint RetryCount { get; set; }
 
         /// <summary>
-        /// Gets or sets the amount of time in seconds before each retry when a transfer has failed with a transient error
-        /// (it changes the default backoff time algorithm between retries).
+        /// Gets or sets the amount of time curl should wait before retrying a failed operation.
+        /// Setting this property to <em>zero</em> means using curl's own exponential wait algorithm. This is the default value.
+        /// <seealso cref="RetryCount"/>
         /// </summary>
         /// <remarks>
-        /// This option is only interesting if <a href="https://curl.haxx.se/docs/manpage.html#--retry">--retry</a> is also used.
-        /// Setting this delay to zero will make curl use the default backoff time.
+        /// According to <a href="https://curl.haxx.se/docs/manpage.html#--retry">the documentation</a>, curl's default wait
+        /// algorithm is to wait <em>one</em> second after the first failure and then double the previous waiting time
+        /// for all subsequent retries until it reaches <em>ten</em> minutes; after that, <em>ten</em> minutes is going to be
+        /// used for all retries until the operation either succeeds, is cancelled by the user or the <see cref="RetryMaxTimeSeconds"/>
+        /// is reached.
         /// </remarks>
         public uint RetryDelaySeconds { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum time in seconds for retries to be done.
+        /// Gets or sets the maximum amount of time during which curl should retry a failed operation.
+        /// Setting this property to <em>zero</em> means retrying without a time limit. This is the default value.
+        /// <seealso cref="RetryCount"/>
+        /// <seealso cref="MaxTime"/>
         /// </summary>
-        /// <remarks>
-        /// The retry timer is reset before the first transfer attempt.
-        /// Retries will be done as usual (see <a href="https://curl.haxx.se/docs/manpage.html#--retry">--retry</a>) as long as the timer hasn't reached this given limit.
-        /// Notice that if the timer hasn't reached the limit, the request will be made and while performing, it may take longer than this given time period.
-        /// To limit a single request´s maximum time, use <a href="https://curl.haxx.se/docs/manpage.html#-m">--max-time</a>.
-        /// Set this option to zero to not timeout retries.
-        /// </remarks>
         public uint RetryMaxTimeSeconds { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether curl should consider <code>ECONNREFUSED</code> (in addition to the other conditions) as a transient error
-        /// for <a href="https://curl.haxx.se/docs/manpage.html#--retry">--retry</a>.
+        /// Gets or sets a value indicating whether curl should consider <code>ECONNREFUSED</code> as a failed operation
+        /// before retrying. The default value is <see langword="false"/>.
+        /// <seealso cref="RetryCount"/>
         /// </summary>
-        /// <remarks>
-        /// This option is used together with <a href="https://curl.haxx.se/docs/manpage.html#--retry">--retry</a>.
-        /// </remarks>
         public bool RetryOnConnectionRefused { get; set; }
 
         /// <summary>
