@@ -151,22 +151,26 @@ namespace Cake.Curl
         public bool RetryOnConnectionRefused { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum time in seconds that you allow the whole operation to take.
+        /// Gets or sets the maximum amount of time the operation is allowed to take.
+        /// <seealso cref="ConnectionTimeout"/>
         /// </summary>
         /// <remarks>
-        /// This is useful for preventing your batch jobs from hanging for hours due to slow networks or links going down.
-        /// Since curl version 7.32.0, this option accepts decimal values, but the actual timeout will decrease in accuracy as the specified timeout increases in decimal precision.
-        /// See also <a href="https://curl.haxx.se/docs/manpage.html#--connect-timeout">--connect-timeout</a>.
+        /// According to <a href="https://curl.haxx.se/docs/manpage.html#-m">curl's documentation</a>, this option is useful
+        /// to prevent batch jobs from hanging indefinitely.
+        /// As of version <em>7.32.0</em>, it's possible to specify decimal values (e.g <code>0.5</code> seconds), but
+        /// keep in mind that the timeout accuracy will decrease as the number of decimal digits increases.
         /// </remarks>
         public TimeSpan? MaxTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum time in seconds that you allow curl's connection to take.
+        /// Gets or sets the maximum amount of time the connection to the remote machine is allowed to take.
+        /// <seealso cref="MaxTime"/>
         /// </summary>
         /// <remarks>
-        /// This only limits the connection phase, so if curl connects within the given period it will continue - if not it will exit.
-        /// Since curl version 7.32.0, this option accepts decimal values.
-        /// See also <a href="https://curl.haxx.se/docs/manpage.html#-m">-m, --max-time</a>.
+        /// According to <a href="https://curl.haxx.se/docs/manpage.html#--connect-timeout">curl's documentation</a>,
+        /// this option only limits the <em>connection</em> time, while <see cref="MaxTime"/> applies to the whole operation.
+        /// As of version <em>7.32.0</em>, it's possible to specify decimal values (e.g <code>0.5</code> seconds), but
+        /// keep in mind that the timeout accuracy will decrease as the number of decimal digits increases.
         /// </remarks>
         public TimeSpan? ConnectionTimeout { get; set; }
     }
