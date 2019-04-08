@@ -4,7 +4,7 @@ using Cake.Core.IO;
 using Cake.Core.IO.Arguments;
 using Cake.Curl.Arguments;
 
-namespace Cake.Curl
+namespace Cake.Curl.Extensions
 {
     internal static class ArgumentsExtensions
     {

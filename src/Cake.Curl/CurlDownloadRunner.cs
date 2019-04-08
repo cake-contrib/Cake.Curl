@@ -4,6 +4,7 @@ using System.Linq;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
+using Cake.Curl.Extensions;
 
 namespace Cake.Curl
 {
