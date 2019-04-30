@@ -16,7 +16,7 @@
   <PropertyGroup>
     <PackageId>Cake.Curl</PackageId>
     <PackageTags>Cake;Script;Build;curl</PackageTags>
-    <PackageIconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
+    <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/cake-contrib/Cake.Curl</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/cake-contrib/Cake.Curl/blob/master/LICENSE.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
