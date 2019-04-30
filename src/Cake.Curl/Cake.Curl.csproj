@@ -34,7 +34,7 @@
 
   <ItemGroup>
     <PackageReference Include="Cake.Core" Version="0.33.0">
-      <PrivateAssets>all</PrivateAssets>
+      <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
       <PrivateAssets>all</PrivateAssets>
