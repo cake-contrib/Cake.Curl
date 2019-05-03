@@ -5,4 +5,4 @@ dotnet: 2.1.4
 dist: trusty
 sudo: required
 script:
-  - ./build.sh
+  - ./build.sh --target=Test
