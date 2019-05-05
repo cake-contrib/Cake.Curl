@@ -129,7 +129,7 @@ Task("Publish-Build-Artifact")
 
 Task("Publish-Code-Coverage-Report")
     .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
-    .WithCriteria(FileExists(Paths.CodeCoverageReportFile))
+    .WithCriteria(() => FileExists(Paths.CodeCoverageReportFile))
     .IsDependentOn("Test")
     .Does(() =>
 {
