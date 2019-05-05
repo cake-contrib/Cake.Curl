@@ -4,6 +4,8 @@ environment:
   PackageOutputDirectory: Packages
   NuGetApiKey:
     secure: F65/TLAg744V13QQ3gfXgBhK+dn2R2khRe80Y8OgBlU1b5YxrNI9UVrX4bduKmqP
+  CoverallsRepoToken:
+    secure: +dhOBfYAs70mZYWqwP91YfYUEwXueaifAP+vTqtZfi+EFjtnI29+vyJIoVuL04OL
 test: off
 build_script:
 - ps: .\build.ps1 -Target Build -Configuration $env:Configuration -PackageOutputDirectory $env:PackageOutputDirectory
