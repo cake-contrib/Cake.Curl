@@ -1,3 +1,5 @@
+#addin nuget:?package=Cake.Coverlet&version=2.2.1
+
 #load build/paths.cake
 #load build/version.cake
 
@@ -13,6 +15,11 @@ Task("Clean")
     CleanDirectory(packageOutputDirectory);
     CleanDirectories("**/bin");
     CleanDirectories("**/obj");
+
+    if (FileExists(Paths.CodeCoverageReportFile))
+    {
+        DeleteFile(Paths.CodeCoverageReportFile);
+    }
 });
 
 Task("Restore-Packages")
@@ -76,7 +83,17 @@ Task("Test")
         settings.Framework = "netcoreapp2.0";
     }
 
-    DotNetCoreTest(Paths.TestProjectFile.FullPath, settings);
+    DotNetCoreTest(
+        Paths.TestProjectFile.FullPath,
+        settings,
+        new CoverletSettings
+        {
+            CollectCoverage = true,
+            CoverletOutputFormat = CoverletOutputFormat.opencover,
+            CoverletOutputDirectory = Paths.CodeCoverageReportFile.GetDirectory(),
+            CoverletOutputName = Paths.CodeCoverageReportFile.GetFilename().ToString()
+        }
+        .WithFilter("[Cake.Curl.*Tests]*"));
 });
 
 Task("Package")
