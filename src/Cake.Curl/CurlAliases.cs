@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Cake.Core;
 using Cake.Core.Annotations;
 using Cake.Core.IO;
@@ -22,6 +23,7 @@ namespace Cake.Curl
     /// </code>
     /// </summary>
     [CakeAliasCategory("Curl")]
+    [ExcludeFromCodeCoverage]
     public static class CurlAliases
     {
         /// <summary>
