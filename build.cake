@@ -64,20 +64,12 @@ Task("Version")
 });
 
 Task("Set-Build-Number")
-    .WithCriteria(() => !BuildSystem.IsLocalBuild)
+    .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
     .IsDependentOn("Version")
     .Does(() =>
 {
-    if (BuildSystem.IsRunningOnAppVeyor)
-    {
-        AppVeyor.UpdateBuildVersion(
-            $"{packageVersion}+{AppVeyor.Environment.Build.Number}");
-    }
-    else if (BuildSystem.IsRunningOnTeamCity)
-    {
-        TeamCity.SetBuildNumber(
-            $"{packageVersion}+{TeamCity.Environment.Build.Number}");
-    }
+    AppVeyor.UpdateBuildVersion(
+        $"{packageVersion}+{AppVeyor.Environment.Build.Number}");
 });
 
 Task("Test")
