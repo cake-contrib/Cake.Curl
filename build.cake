@@ -63,7 +63,7 @@ Task("Version")
     }
 });
 
-Task("Set-Build-Version")
+Task("Set-Build-Number")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
     .IsDependentOn("Version")
     .Does(() =>
@@ -164,11 +164,11 @@ Task("Upload-Package")
 
 Task("Build")
     .IsDependentOn("Version")
-    .IsDependentOn("Set-Build-Version")
     .IsDependentOn("Test")
     .IsDependentOn("Package")
     .IsDependentOn("Publish-Build-Artifact")
-    .IsDependentOn("Publish-Code-Coverage-Report");
+    .IsDependentOn("Publish-Code-Coverage-Report")
+    .IsDependentOn("Set-Build-Number");
 
 Task("Deploy")
     .IsDependentOn("Version")
