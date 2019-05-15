@@ -96,6 +96,7 @@ Task("Test")
             CoverletOutputDirectory = Paths.CodeCoverageReportFile.GetDirectory(),
             CoverletOutputName = Paths.CodeCoverageReportFile.GetFilename().ToString()
         }
+        .WithFilter("[xunit.*]*")
         .WithFilter("[Cake.Curl.*Tests]*"));
 });
 
