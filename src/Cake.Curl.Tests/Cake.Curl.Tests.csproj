@@ -6,6 +6,7 @@
     <AssemblyName>Cake.Curl.Tests</AssemblyName>
     <IsTestProject>true</IsTestProject>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <PropertyGroup>
