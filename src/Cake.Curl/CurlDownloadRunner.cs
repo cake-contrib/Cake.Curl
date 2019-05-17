@@ -115,6 +115,11 @@ namespace Cake.Curl
                 arguments.AppendDownloadToCurrentDirectory(hosts);
             }
 
+            if (settings.CreateDirectories)
+            {
+                arguments.Append("--create-dirs");
+            }
+
             return arguments;
         }
     }

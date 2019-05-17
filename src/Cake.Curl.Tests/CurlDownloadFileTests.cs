@@ -539,6 +539,38 @@ namespace Cake.Curl.Tests
                 // Then
                 Assert.DoesNotContain("--connect-timeout", result.Args);
             }
+
+            [Fact]
+            public void Should_Set_The_CreateDirs_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { CreateDirectories = true }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--create-dirs", result.Args);
+            }
+
+            [Fact]
+            public void Should_Not_Set_The_CreateDirs_Option_As_Argument()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { CreateDirectories = false }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.DoesNotContain("--create-dirs", result.Args);
+            }
         }
     }
 }
