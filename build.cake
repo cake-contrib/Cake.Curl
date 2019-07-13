@@ -1,3 +1,8 @@
+#tool nuget:?package=coveralls.io&version=1.4.2
+
+#addin nuget:?package=Cake.Coverlet&version=2.2.1
+#addin nuget:?package=Cake.Coveralls&version=0.9.0
+
 #load build/paths.cake
 #load build/version.cake
 
@@ -13,6 +18,11 @@ Task("Clean")
     CleanDirectory(packageOutputDirectory);
     CleanDirectories("**/bin");
     CleanDirectories("**/obj");
+
+    if (FileExists(Paths.CodeCoverageReportFile))
+    {
+        DeleteFile(Paths.CodeCoverageReportFile);
+    }
 });
 
 Task("Restore-Packages")
@@ -53,7 +63,7 @@ Task("Version")
     }
 });
 
-Task("Set-Build-Version")
+Task("Set-Build-Number")
     .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
     .IsDependentOn("Version")
     .Does(() =>
@@ -76,7 +86,18 @@ Task("Test")
         settings.Framework = "netcoreapp2.0";
     }
 
-    DotNetCoreTest(Paths.TestProjectFile.FullPath, settings);
+    DotNetCoreTest(
+        Paths.TestProjectFile.FullPath,
+        settings,
+        new CoverletSettings
+        {
+            CollectCoverage = true,
+            CoverletOutputFormat = CoverletOutputFormat.opencover,
+            CoverletOutputDirectory = Paths.CodeCoverageReportFile.GetDirectory(),
+            CoverletOutputName = Paths.CodeCoverageReportFile.GetFilename().ToString()
+        }
+        .WithFilter("[xunit.*]*")
+        .WithFilter("[Cake.Curl.*Tests]*"));
 });
 
 Task("Package")
@@ -107,6 +128,20 @@ Task("Publish-Build-Artifact")
         });
 });
 
+Task("Publish-Code-Coverage-Report")
+    .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
+    .WithCriteria(() => FileExists(Paths.CodeCoverageReportFile))
+    .IsDependentOn("Test")
+    .Does(() =>
+{
+    CoverallsIo(
+        Paths.CodeCoverageReportFile,
+        new CoverallsIoSettings
+        {
+            RepoToken = EnvironmentVariable("CoverallsRepoToken")
+        });
+});
+
 Task("Upload-Package")
     .Does(() =>
 {
@@ -122,10 +157,11 @@ Task("Upload-Package")
 
 Task("Build")
     .IsDependentOn("Version")
-    .IsDependentOn("Set-Build-Version")
     .IsDependentOn("Test")
     .IsDependentOn("Package")
-    .IsDependentOn("Publish-Build-Artifact");
+    .IsDependentOn("Publish-Build-Artifact")
+    .IsDependentOn("Publish-Code-Coverage-Report")
+    .IsDependentOn("Set-Build-Number");
 
 Task("Deploy")
     .IsDependentOn("Version")

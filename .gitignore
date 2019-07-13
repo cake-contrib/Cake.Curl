@@ -5,4 +5,5 @@ obj/
 tools/
 dist/
 *.user
+coverage.*
 project.lock.json

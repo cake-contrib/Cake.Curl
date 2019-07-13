@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>4.0.0</Version>
+    <Version>4.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -10,6 +10,7 @@
     <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>Cake.Curl</AssemblyName>
   </PropertyGroup>
 
@@ -18,7 +19,7 @@
     <PackageTags>Cake;Script;Build;curl</PackageTags>
     <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/cake-contrib/Cake.Curl</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/cake-contrib/Cake.Curl/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/cake-contrib/Cake.Curl</RepositoryUrl>
   </PropertyGroup>
@@ -34,7 +35,7 @@
 
   <ItemGroup>
     <PackageReference Include="Cake.Core" Version="0.33.0">
-      <PrivateAssets>All</PrivateAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
       <PrivateAssets>all</PrivateAssets>

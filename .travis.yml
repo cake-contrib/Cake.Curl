@@ -1,8 +1,8 @@
 language: csharp
 install: true
-mono: latest
-dotnet: 2.1.4
+mono: none
+dotnet: 2.1.502
 dist: trusty
 sudo: required
 script:
-  - ./build.sh
+  - ./build.sh --target=Test
