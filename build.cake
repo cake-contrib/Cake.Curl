@@ -3,19 +3,30 @@
 #addin nuget:?package=Cake.Coverlet&version=2.2.1
 #addin nuget:?package=Cake.Coveralls&version=0.9.0
 
+#load build/package.cake
 #load build/paths.cake
 #load build/version.cake
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var packageOutputDirectory = Argument("packageOutputDirectory", "dist");
-var packageVersion = Argument("packageVersion", string.Empty);
-var packageFilePath = Argument("packageFilePath", string.Empty);
+
+Setup<PackageMetadata>(context =>
+{
+    var package = new PackageMetadata(
+        outputDirectory: Argument("packageOutputDirectory", "dist"),
+        version: Argument("packageVersion", "0.1.0"),
+        name: "Cake.Curl",
+        extension: "nupkg");
+
+    Information($"Package metadata\n{package}");
+
+    return package;
+});
 
 Task("Clean")
-    .Does(() =>
+    .Does<PackageMetadata>(package =>
 {
-    CleanDirectory(packageOutputDirectory);
+    CleanDirectory(package.OutputDirectory);
     CleanDirectories("**/bin");
     CleanDirectories("**/obj");
 
@@ -49,27 +60,27 @@ Task("Compile")
 });
 
 Task("Version")
-    .Does(() =>
+    .Does<PackageMetadata>(package =>
 {
-    if (string.IsNullOrEmpty(packageVersion))
+    if (package.Version == "0.1.0")
     {
-        packageVersion = GetVersionFromProjectFile(Context, Paths.ProjectFile);
-        Information($"Determined version {packageVersion} from the project file");
+        package.Version = GetVersionFromProjectFile(Context, Paths.ProjectFile);
+        Information($"Determined version {package.Version} from the project file");
     }
     else
     {
-        SetVersionToProjectFile(Context, Paths.ProjectFile, packageVersion);
-        Information($"Assigned version {packageVersion} to the project file");
+        SetVersionToProjectFile(Context, Paths.ProjectFile, package.Version);
+        Information($"Assigned version {package.Version} to the project file");
     }
 });
 
 Task("Set-Build-Number")
     .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
     .IsDependentOn("Version")
-    .Does(() =>
+    .Does<PackageMetadata>(package =>
 {
     AppVeyor.UpdateBuildVersion(
-        $"{packageVersion}+{AppVeyor.Environment.Build.Number}");
+        $"{package.Version}+{AppVeyor.Environment.Build.Number}");
 });
 
 Task("Test")
@@ -103,13 +114,13 @@ Task("Test")
 Task("Package")
     .IsDependentOn("Restore-Packages")
     .IsDependentOn("Version")
-    .Does(() =>
+    .Does<PackageMetadata>(package =>
 {
     DotNetCorePack(
         Paths.ProjectFile.FullPath,
         new DotNetCorePackSettings
         {
-            OutputDirectory = packageOutputDirectory,
+            OutputDirectory = package.OutputDirectory,
             Configuration = configuration
         });
 });
@@ -117,10 +128,10 @@ Task("Package")
 Task("Publish-Build-Artifact")
     .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
     .IsDependentOn("Package")
-    .Does(() =>
+    .Does<PackageMetadata>(package =>
 {
     AppVeyor.UploadArtifact(
-        $"{packageOutputDirectory}/Cake.Curl.{packageVersion}.nupkg",
+        package.FullPath,
         new AppVeyorUploadArtifactsSettings
         {
             DeploymentName = "NuGet",
@@ -143,10 +154,11 @@ Task("Publish-Code-Coverage-Report")
 });
 
 Task("Upload-Package")
-    .Does(() =>
+    .IsDependentOn("Package")
+    .Does<PackageMetadata>(package =>
 {
     NuGetPush(
-        packageFilePath,
+        package.FullPath,
         new NuGetPushSettings
         {
             Source = "https://www.nuget.org/api/v2/package",
