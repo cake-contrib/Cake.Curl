@@ -6,14 +6,3 @@ public static string GetVersionFromProjectFile(
         projectFile,
         "/Project/PropertyGroup/Version/text()");
 }
-
-public static void SetVersionToProjectFile(
-    ICakeContext context,
-    FilePath projectFile,
-    string version)
-{
-    context.XmlPoke(
-        projectFile,
-        "/Project/PropertyGroup/Version",
-        version);
-}

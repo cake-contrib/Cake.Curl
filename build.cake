@@ -14,7 +14,7 @@ Setup<PackageMetadata>(context =>
 {
     var package = new PackageMetadata(
         outputDirectory: Argument("packageOutputDirectory", "dist"),
-        version: Argument("packageVersion", "0.1.0"),
+        version: GetVersionFromProjectFile(context, Paths.ProjectFile),
         name: "Cake.Curl",
         extension: "nupkg");
 
@@ -59,24 +59,8 @@ Task("Compile")
     DotNetCoreBuild(Paths.ProjectFile.FullPath, settings);
 });
 
-Task("Version")
-    .Does<PackageMetadata>(package =>
-{
-    if (package.Version == "0.1.0")
-    {
-        package.Version = GetVersionFromProjectFile(Context, Paths.ProjectFile);
-        Information($"Determined version {package.Version} from the project file");
-    }
-    else
-    {
-        SetVersionToProjectFile(Context, Paths.ProjectFile, package.Version);
-        Information($"Assigned version {package.Version} to the project file");
-    }
-});
-
 Task("Set-Build-Number")
     .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
-    .IsDependentOn("Version")
     .Does<PackageMetadata>(package =>
 {
     AppVeyor.UpdateBuildVersion(
@@ -113,7 +97,6 @@ Task("Test")
 
 Task("Package")
     .IsDependentOn("Restore-Packages")
-    .IsDependentOn("Version")
     .Does<PackageMetadata>(package =>
 {
     DotNetCorePack(
@@ -168,7 +151,6 @@ Task("Upload-Package")
 });
 
 Task("Build")
-    .IsDependentOn("Version")
     .IsDependentOn("Test")
     .IsDependentOn("Package")
     .IsDependentOn("Publish-Build-Artifact")
@@ -176,7 +158,6 @@ Task("Build")
     .IsDependentOn("Set-Build-Number");
 
 Task("Deploy")
-    .IsDependentOn("Version")
     .IsDependentOn("Upload-Package");
 
 Task("Default")
