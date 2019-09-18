@@ -36,14 +36,7 @@ Task("Clean")
     }
 });
 
-Task("Restore-Packages")
-    .Does(() =>
-{
-    DotNetCoreRestore(Paths.SolutionFile.FullPath);
-});
-
 Task("Compile")
-    .IsDependentOn("Restore-Packages")
     .Does(() =>
 {
     var settings = new DotNetCoreBuildSettings
@@ -68,7 +61,6 @@ Task("Set-Build-Number")
 });
 
 Task("Test")
-    .IsDependentOn("Restore-Packages")
     .Does(() =>
 {
     var settings = new DotNetCoreTestSettings
@@ -96,7 +88,6 @@ Task("Test")
 });
 
 Task("Package")
-    .IsDependentOn("Restore-Packages")
     .Does<PackageMetadata>(package =>
 {
     DotNetCorePack(
