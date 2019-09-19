@@ -88,6 +88,7 @@ Task("Test")
 });
 
 Task("Package")
+    .IsDependentOn("Test")
     .Does<PackageMetadata>(package =>
 {
     DotNetCorePack(
