@@ -5,6 +5,7 @@
 
 #load build/package.cake
 #load build/paths.cake
+#load build/vcs.cake
 #load build/version.cake
 
 var target = Argument("target", "Default");
@@ -129,6 +130,9 @@ Task("Publish-Code-Coverage-Report")
 });
 
 Task("Upload-Package")
+    .WithCriteria(
+        LatestCommitHasVersionTag(Context),
+        "The latest commit doesn't have a version tag")
     .IsDependentOn("Package")
     .Does<PackageMetadata>(package =>
 {
