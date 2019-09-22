@@ -24,4 +24,4 @@ if [ ! -f "$CAKE_DLL" ]; then
 fi
 
 # Run the build script
-exec dotnet "$CAKE_DLL" "$@"
+exec dotnet "$CAKE_DLL" --verbosity=Verbose "$@"
