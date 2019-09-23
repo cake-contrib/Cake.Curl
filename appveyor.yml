@@ -1,13 +1,12 @@
 image: Visual Studio 2017
 environment:
   Configuration: Release
-  PackageOutputDirectory: Packages
   NuGetApiKey:
     secure: iAFABwvwGaY1sp6Kuipvxe1rNHrvm31VOSmU5sOpxgEt7MTzdSVprHHR9KW7fTDy
   CoverallsRepoToken:
     secure: +dhOBfYAs70mZYWqwP91YfYUEwXueaifAP+vTqtZfi+EFjtnI29+vyJIoVuL04OL
 test: off
 build_script:
-- ps: .\build.ps1 -Target Build -Configuration $env:Configuration -PackageOutputDirectory $env:PackageOutputDirectory
+- ps: .\build.ps1 -Target Build -Configuration $env:Configuration
 deploy_script:
 - ps: if ($env:AppVeyor_Repo_Tag -eq $true) { .\build.ps1 -Target Deploy -PackageFilePath $artifacts["NuGet"].path }
