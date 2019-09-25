@@ -4,5 +4,7 @@ mono: none
 dotnet: 2.1.502
 dist: trusty
 sudo: required
+git:
+  depth: false
 script:
   - ./build.sh --target=Test
