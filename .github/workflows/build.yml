@@ -1,18 +1,16 @@
 name: Build
 on: [push, pull_request]
-env:
-  CONFIGURATION: Release
 jobs:
-  build_on_windows:
-    runs-on: windows-latest
+  build:
+    name: Build and Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v1
+      - name: Get the sources
+        uses: actions/checkout@v1
       - name: Run the build script
-        run: .\build.ps1 -Target Build -Configuration $CONFIGURATION
-        shell: powershell
-  build_on_linux:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Run the build script
-        run: ./build.sh --target=Test --configuration=$CONFIGURATION
+        uses: ecampidoglio/cake-action@master
+        with:
+          target: Test
