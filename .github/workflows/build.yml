@@ -11,6 +11,6 @@ jobs:
       - name: Get the sources
         uses: actions/checkout@v1
       - name: Run the build script
-        uses: ecampidoglio/cake-action@master
+        uses: ecampidoglio/cake-action@v1.1.0
         with:
           target: Test
