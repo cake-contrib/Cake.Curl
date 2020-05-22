@@ -1,10 +1,9 @@
 using System;
 using Cake.Core.IO;
-using Cake.Testing.Fixtures;
 
 namespace Cake.Curl.Tests.Fixtures
 {
-    internal sealed class CurlUploadFileFixture : ToolFixture<CurlSettings>
+    internal sealed class CurlUploadFileFixture : SafeToolFixture<CurlSettings>
     {
         public CurlUploadFileFixture()
             : base("curl")

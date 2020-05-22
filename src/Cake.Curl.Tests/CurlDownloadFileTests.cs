@@ -169,6 +169,22 @@ namespace Cake.Curl.Tests
             }
 
             [Fact]
+            public void Should_Redact_The_User_Password_In_The_Safe_Arguments()
+            {
+                // Given
+                var fixture = new CurlDownloadFileFixture
+                {
+                    Settings = { Username = "user", Password = "password" }
+                };
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Contains("--user \"user:[REDACTED]\"", result.SafeArgs);
+            }
+
+            [Fact]
             public void Should_Not_Set_The_User_Credentials_As_Argument_If_Username_Is_Null()
             {
                 // Given

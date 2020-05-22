@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Cake.Testing.Fixtures;
 
 namespace Cake.Curl.Tests.Fixtures
 {
     internal sealed class CurlDownloadMultipleFilesFixture
-        : ToolFixture<CurlDownloadSettings>
+        : SafeToolFixture<CurlDownloadSettings>
     {
         public CurlDownloadMultipleFilesFixture()
             : base("curl")
