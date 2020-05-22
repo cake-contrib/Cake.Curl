@@ -4,24 +4,24 @@ namespace Cake.Curl.Arguments
 {
     /// <summary>
     /// Represents an argument that consists of
-    /// a name and a value separated by a character.
+    /// a name and a secret value separated by a character.
     /// </summary>
-    internal class NameValueArgument : ConcatenatedArgument
+    internal class NameSecretValueArgument : ConcatenatedArgument
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NameValueArgument"/> class.
+        /// Initializes a new instance of the <see cref="NameSecretValueArgument"/> class.
         /// </summary>
         /// <param name="name">The name part of the argument.</param>
         /// <param name="separator">The separator between the name and the value.</param>
-        /// <param name="value">The value part of the argument.</param>
-        public NameValueArgument(
+        /// <param name="secretValue">The secret value part of the argument.</param>
+        public NameSecretValueArgument(
             string name,
             string separator,
-            string value)
+            string secretValue)
             : base(
                 new TextArgument(name),
                 new TextArgument(separator),
-                new TextArgument(value))
+                new SecretArgument(new TextArgument(secretValue)))
         {
         }
     }

@@ -1,7 +1,6 @@
 using System.Globalization;
 using Cake.Core;
 using Cake.Core.IO;
-using Cake.Core.IO.Arguments;
 using Cake.Curl.Arguments;
 
 namespace Cake.Curl.Extensions
@@ -26,10 +25,7 @@ namespace Cake.Curl.Extensions
             {
                 arguments.AppendSwitchQuoted(
                     "--user",
-                    new NameValueArgument(
-                        settings.Username,
-                        ":",
-                        new SecretArgument(new TextArgument(settings.Password))));
+                    new NameSecretValueArgument(settings.Username, ":", settings.Password));
             }
 
             if (settings.Headers != null)
