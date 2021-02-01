@@ -3,6 +3,7 @@
     "src"
   ],
   "sdk": {
-    "version": "2.1.500"
+    "version": "5.0.100",
+    "rollForward": "latestFeature"
   }
 }
