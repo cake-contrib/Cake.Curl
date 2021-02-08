@@ -71,7 +71,7 @@ Task("Test")
 
     if (IsRunningOnUnix())
     {
-        settings.Framework = "netcoreapp2.0";
+        settings.Framework = "netcoreapp2.1";
     }
 
     DotNetCoreTest(
