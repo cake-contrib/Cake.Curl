@@ -9,4 +9,4 @@ test: off
 build_script:
 - ps: .\build.ps1 -Target Build -Configuration $env:Configuration
 deploy_script:
-- ps: .\build.ps1 -Target Deploy -Configuration $env:Configuration
+- ps: if ($env:APPVEYOR_REPO_TAG -eq $true) { .\build.ps1 -Target Deploy -Configuration $env:Configuration }
