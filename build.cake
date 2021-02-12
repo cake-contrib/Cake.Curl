@@ -28,13 +28,9 @@ Task("Clean")
     .Does<PackageMetadata>(package =>
 {
     CleanDirectory(package.OutputDirectory);
+    CleanDirectory(Paths.CodeCoverageDirectory);
     CleanDirectories("**/bin");
     CleanDirectories("**/obj");
-
-    if (FileExists(Paths.CodeCoverageReportFile))
-    {
-        DeleteFile(Paths.CodeCoverageReportFile);
-    }
 });
 
 Task("Compile")
@@ -81,8 +77,8 @@ Task("Test")
         {
             CollectCoverage = true,
             CoverletOutputFormat = CoverletOutputFormat.opencover,
-            CoverletOutputDirectory = Paths.CodeCoverageReportFile.GetDirectory(),
-            CoverletOutputName = Paths.CodeCoverageReportFile.GetFilename().ToString()
+            CoverletOutputDirectory = Paths.CodeCoverageDirectory,
+            CoverletOutputName = "coverage"
         }
         .WithFilter("[xunit.*]*")
         .WithFilter("[Cake.Curl.*Tests]*"));
@@ -117,16 +113,19 @@ Task("Publish-Build-Artifact")
 
 Task("Publish-Code-Coverage-Report")
     .WithCriteria(BuildSystem.IsRunningOnAppVeyor)
-    .WithCriteria(() => FileExists(Paths.CodeCoverageReportFile))
+    .WithCriteria(() => DirectoryExists(Paths.CodeCoverageDirectory))
     .IsDependentOn("Test")
     .Does(() =>
 {
-    CoverallsIo(
-        Paths.CodeCoverageReportFile,
-        new CoverallsIoSettings
-        {
-            RepoToken = EnvironmentVariable("CoverallsRepoToken")
-        });
+    foreach (var coverageReport in GetFiles($"{Paths.CodeCoverageDirectory}/**/*.xml"))
+    {
+        CoverallsIo(
+            coverageReport,
+            new CoverallsIoSettings
+            {
+                RepoToken = EnvironmentVariable("CoverallsRepoToken")
+            });
+    }
 });
 
 Task("Upload-Package")
