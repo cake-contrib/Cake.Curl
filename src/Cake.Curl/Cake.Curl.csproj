@@ -16,7 +16,7 @@
 
   <PropertyGroup>
     <PackageId>Cake.Curl</PackageId>
-    <PackageTags>Cake;Script;Build;curl</PackageTags>
+    <PackageTags>Cake;Script;Build;curl;cake-addin</PackageTags>
     <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/cake-contrib/Cake.Curl</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
