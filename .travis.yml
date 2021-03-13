@@ -4,6 +4,8 @@ mono: none
 dotnet: 5.0
 dist: xenial
 sudo: required
+addons:
+  apt_packages: dotnet-sdk-2.1
 git:
   depth: false
 script:
